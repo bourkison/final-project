@@ -17,13 +17,16 @@
   </fieldset>
   <fieldset>
     <%= f.label :email %><br>
-    <%= f.text_field :email %>
+    <%= f.text_field :email, :id => 'emailField' %>
   </fieldset>
   <fieldset>
-    <%= f.label :address %><br>
-    <%= f.text_field :address %>
+    <label for="addr">Address</label><br>
+    <input type="text" id="addr" name="user[address]">
+    <!-- <%= f.label :address %><br>
+    <%= f.text_field :address, :id => 'addr' %> -->
   </fieldset>
   <fieldset>
+    <div class="conf"></div>
     <%= f.label :description, "Give a brief description about yourself, that the people who walk your dogs will see or the dogs that you walk's owners will see." %><br>
     <%= f.text_field :description %>
   </fieldset>
@@ -35,6 +38,74 @@
     <%= f.label :password_confirmation %><br>
     <%= f.password_field :password_confirmation %>
   </fieldset>
+  <input type="hidden" name="user[address]" id="hiddenAddr" value=""/>
+  <input type="hidden" name="user[latitude]" id="lat" value=""/>
+  <input type="hidden" name="user[longtitude]" id="lng" value=""/>
+
 
   <%= f.submit "Sign Up!" %>
 <% end %>
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBknCH8ac7AiYxL-9HQkKTT8KGKGydC7LU&libraries=places"></script>
+<script>
+
+  $(document).ready(function() {
+    // We must pass through the email, as the email is unique and we can then create the user, then with an ajax request add the latitute longtitude and adress.
+    var addressObj = {
+      lat: 0,
+      lng: 0,
+      address: ''
+    };
+
+    // Autocomplete box
+    var defaultBounds = new google.maps.LatLngBounds(
+      new google.maps.LatLng(-35, 150),
+      new google.maps.LatLng(-33, 152)
+    );
+
+    var $input = $("#addr");
+    var options = {
+      bounds: defaultBounds,
+      types: ['address']
+    };
+
+    autocomplete = new google.maps.places.Autocomplete($input[0], options);
+
+    autocomplete.addListener('place_changed', function() {
+      googObj = autocomplete.getPlace();
+      addressObj.address = googObj.formatted_address;
+      addressObj.lat = googObj.geometry.location.lat();
+      addressObj.lng = googObj.geometry.location.lng();
+
+      console.log("Address:", addressObj.address);
+      console.log("Latitude:", addressObj.lat)
+      console.log("Longtitude", addressObj.lng);
+    });
+
+
+    // This is pretty much the same as preventing default of the button, doing your code, then later continuing the default
+    $('form').submit(function() {
+
+      $("#hiddenAddr").val(addressObj.address);
+      $("#lat").val(addressObj.lat);
+      $("#lng").val(addressObj.lng);
+
+      return true;
+      // addressObj.email = $('#emailField').val();
+      //
+      // var jsonAddr = JSON.stringify(addressObj);
+      // console.log(jsonAddr);
+      // $.ajax({
+      //   url: '/db/newuseraddress',
+      //   method: 'POST',
+      //   dataType: 'json',
+      //   async: false,
+      //   data: jsonAddr,
+      //   success: function() {
+      //     return true;
+      //   }
+      // })
+    });
+  });
+
+</script>
