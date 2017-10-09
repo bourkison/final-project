@@ -1,14 +1,10 @@
 <h1>Ubog</h1>
 
 <div class="container">
-
   <% if @current_user.present? %>
       <input type="text" id="addr" placeholder="Address. Leave blank for home address."/>
       <button>Book Dog Walk!</button>
-    <% end %>
-
   <% end %>
-
 </div>
 
 
@@ -46,34 +42,35 @@
 
 
 
-    // CODE FOR AUTOCOMPLETE:
-    var addressObj = {
-      lat: 0,
-      lng: 0,
-      address: ''
-    };
-
     <% if @current_user.present? %>
-    // Autocomplete box
-    var defaultBounds = new google.maps.LatLngBounds(
-      new google.maps.LatLng(-35, 150),
-      new google.maps.LatLng(-33, 152)
-    );
+      // CODE FOR AUTOCOMPLETE:
+      var addressObj = {
+        lat: 0,
+        lng: 0,
+        address: ''
+      };
 
-    var $input = $("#addr");
-    var options = {
-      bounds: defaultBounds,
-      types: ['address']
-    };
+      // Autocomplete box
+      var defaultBounds = new google.maps.LatLngBounds(
+        new google.maps.LatLng(-35, 150),
+        new google.maps.LatLng(-33, 152)
+      );
 
-    autocomplete = new google.maps.places.Autocomplete($input[0], options);
+      var $input = $("#addr");
+      var options = {
+        bounds: defaultBounds,
+        types: ['address']
+      };
 
-    autocomplete.addListener('place_changed', function() {
-      googObj = autocomplete.getPlace();
-      addressObj.address = googObj.formatted_address;
-      addressObj.lat = googObj.geometry.location.lat();
-      addressObj.lng = googObj.geometry.location.lng();
-    });
+      autocomplete = new google.maps.places.Autocomplete($input[0], options);
+
+      autocomplete.addListener('place_changed', function() {
+        googObj = autocomplete.getPlace();
+        addressObj.address = googObj.formatted_address;
+        addressObj.lat = googObj.geometry.location.lat();
+        addressObj.lng = googObj.geometry.location.lng();
+      });
+
       $('button').click(function(e) {
         e.preventDefault();
 
@@ -82,17 +79,22 @@
           addressObj.lng = <%= @current_user.longtitude %>;
           addressObj.address = "<%= @current_user.address %>";
         }
-
-        $('form').submit(function() {
-
-          $("#hiddenAddr").val(addressObj.address);
-          $("#lat").val(addressObj.lat);
-          $("#lng").val(addressObj.lng);
-
-          return true;
+        // debugger
+        $.ajax({
+          url: '/bookings',
+          method: 'POST',
+          data: { booking: {
+            address: addressObj.address,
+            latitude: addressObj.lat,
+            longtitude: addressObj.lng
+          }},
+          success: function(e) {
+            console.log(e);
+            debugger;
+          }
         });
-     });
-     <% end %>
+      });
+   <% end %>
   }
 
 
