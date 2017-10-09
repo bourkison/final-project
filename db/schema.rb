@@ -17,9 +17,6 @@ ActiveRecord::Schema.define(version: 20171007071616) do
 
   create_table "bookings", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "trip_id"
-    t.datetime "picked_up"
-    t.datetime "dropped_off"
     t.float "latitude"
     t.float "longtitude"
     t.datetime "created_at", null: false

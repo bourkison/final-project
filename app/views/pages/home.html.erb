@@ -11,7 +11,7 @@
 <div id="map"></div>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBknCH8ac7AiYxL-9HQkKTT8KGKGydC7LU&libraries=places&callback=initMap" async defer></script>
-<!-- SCRIPT FOR MAP: -->
+
 <script>
   // CODE FOR MAP:
   var addr;
@@ -38,11 +38,9 @@
         map: map,
         title: 'Home'
       });
-    <% end %>
 
 
 
-    <% if @current_user.present? %>
       // CODE FOR AUTOCOMPLETE:
       var addressObj = {
         lat: 0,
@@ -84,13 +82,15 @@
           url: '/bookings',
           method: 'POST',
           data: { booking: {
-            address: addressObj.address,
             latitude: addressObj.lat,
             longtitude: addressObj.lng
           }},
           success: function(e) {
             console.log(e);
             debugger;
+          },
+          error: function( e ){
+            debugger
           }
         });
       });
