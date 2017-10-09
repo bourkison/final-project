@@ -1,10 +1,25 @@
 <h1>Ubog</h1>
 
+<div class="container">
+
+  <% if @current_user.present? %>
+      <input type="text" id="addr" placeholder="Address. Leave blank for home address."/>
+      <button>Book Dog Walk!</button>
+    <% end %>
+
+  <% end %>
+
+</div>
+
 
 <div id="map"></div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBknCH8ac7AiYxL-9HQkKTT8KGKGydC7LU&libraries=places&callback=initMap" async defer></script>
+<!-- SCRIPT FOR MAP: -->
 <script>
+  // CODE FOR MAP:
   var addr;
-  function initMap() {
+  var initMap = function() {
     addr = {
       lat: -33.8688,
       lng: 151.2093
@@ -28,8 +43,58 @@
         title: 'Home'
       });
     <% end %>
+
+
+
+    // CODE FOR AUTOCOMPLETE:
+    var addressObj = {
+      lat: 0,
+      lng: 0,
+      address: ''
+    };
+
+    <% if @current_user.present? %>
+    // Autocomplete box
+    var defaultBounds = new google.maps.LatLngBounds(
+      new google.maps.LatLng(-35, 150),
+      new google.maps.LatLng(-33, 152)
+    );
+
+    var $input = $("#addr");
+    var options = {
+      bounds: defaultBounds,
+      types: ['address']
+    };
+
+    autocomplete = new google.maps.places.Autocomplete($input[0], options);
+
+    autocomplete.addListener('place_changed', function() {
+      googObj = autocomplete.getPlace();
+      addressObj.address = googObj.formatted_address;
+      addressObj.lat = googObj.geometry.location.lat();
+      addressObj.lng = googObj.geometry.location.lng();
+    });
+      $('button').click(function(e) {
+        e.preventDefault();
+
+        if (addressObj.address === '') {
+          addressObj.lat = <%= @current_user.latitude %>;
+          addressObj.lng = <%= @current_user.longtitude %>;
+          addressObj.address = "<%= @current_user.address %>";
+        }
+
+        $('form').submit(function() {
+
+          $("#hiddenAddr").val(addressObj.address);
+          $("#lat").val(addressObj.lat);
+          $("#lng").val(addressObj.lng);
+
+          return true;
+        });
+     });
+     <% end %>
   }
 
-</script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD5KHIJxL3ajTIsVlQjkfLZUQ6A0yflsdY&callback=initMap" async defer></script>
+
+</script>

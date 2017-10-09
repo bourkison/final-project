@@ -17,10 +17,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def addr_input
-
-  end
-
   private
   def user_params
     params.require(:user).permit(:name, :email, :address, :description, :password, :password_confirmation, :latitude, :longtitude)
