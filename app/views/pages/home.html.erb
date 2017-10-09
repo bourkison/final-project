@@ -204,22 +204,28 @@
                     map: map,
                     title: `Dog`
                   });
-                });
 
+                  blah(distances.length, locations);
+                });
               }
               console.log("GEOCODED", locations);
-
-
             });
-
-
           },
           error: function(e) {
             debugger
           }
         });
-
       });
+
+      var blah = function(num, locations) {
+
+        if (locations.length !== num) {
+          return;
+        }
+
+        console.log("WORKING");
+
+      }
    <% end %>
   }
 

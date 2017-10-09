@@ -6563,3 +6563,189 @@ Processing by TripsController#create as JSON
 Completed 200 OK in 10ms (Views: 1.5ms | ActiveRecord: 2.2ms)
 
 
+Started GET "/" for 10.0.2.2 at 2017-10-09 06:24:47 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+  [1m[35m (1.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PagesController#home as HTML
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (9.4ms)
+Completed 200 OK in 750ms (Views: 742.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/login" for 10.0.2.2 at 2017-10-09 06:24:59 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SessionController#new as HTML
+  Rendering session/new.html.erb within layouts/application
+  Rendered session/new.html.erb within layouts/application (1.5ms)
+Completed 200 OK in 281ms (Views: 280.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for 10.0.2.2 at 2017-10-09 06:25:14 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SessionController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"2a+5pA/vRqqDHq35TTCb2/WveKqzcAUrvwJL/pFjtrQZ7tfwNktrNxuR7zluECQcO5YnApOCeWrXsQsQ1XAt3g==", "email"=>"harry@ga.co", "password"=>"[FILTERED]", "commit"=>"Login"}
+  [1m[36mUser Load (1.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "harry@ga.co"], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Completed 302 Found in 193ms (ActiveRecord: 9.6ms)
+
+
+Started GET "/" for 10.0.2.2 at 2017-10-09 06:25:15 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by PagesController#home as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 229ms (Views: 178.7ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/" for 10.0.2.2 at 2017-10-09 06:25:28 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by PagesController#home as HTML
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 555ms (Views: 553.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/login" for 10.0.2.2 at 2017-10-09 06:25:39 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SessionController#new as HTML
+  Rendering session/new.html.erb within layouts/application
+  Rendered session/new.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 567ms (Views: 566.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for 10.0.2.2 at 2017-10-09 06:25:44 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SessionController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"cTjXs3WiYlcYH7PKPbA1bTmf721aI70HHRn9NFipa5lSpynVIr2dvurPto5zxJoyq8NUcEwtkrPXQEH/4XH/jQ==", "email"=>"kane@ga.co", "password"=>"[FILTERED]", "commit"=>"Login"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "kane@ga.co"], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Completed 302 Found in 85ms (ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 10.0.2.2 at 2017-10-09 06:25:44 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by PagesController#home as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 241ms (Views: 239.8ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/bookings" for 10.0.2.2 at 2017-10-09 06:26:29 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by BookingsController#create as */*
+  Parameters: {"booking"=>{"address"=>"15 Yeo St, Neutral Bay NSW 2089, Australia", "latitude"=>"-33.83190039999999", "longtitude"=>"151.21698249999997"}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mBooking Load (2.8ms)[0m  [1m[34mSELECT  "bookings".* FROM "bookings" WHERE "bookings"."user_id" = $1 ORDER BY "bookings"."id" DESC LIMIT $2[0m  [["user_id", 5], ["LIMIT", 1]]
+  [1m[36mCACHE Booking Load (0.0ms)[0m  [1m[34mSELECT  "bookings".* FROM "bookings" WHERE "bookings"."user_id" = $1 ORDER BY "bookings"."id" DESC LIMIT $2[0m  [["user_id", 5], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "bookings" WHERE "bookings"."id" = $1[0m  [["id", 11]]
+  [1m[35m (2.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (2.6ms)[0m  [1m[32mINSERT INTO "bookings" ("latitude", "longtitude", "created_at", "updated_at", "address") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["latitude", -33.83190039999999], ["longtitude", 151.21698249999997], ["created_at", "2017-10-09 10:26:29.574321"], ["updated_at", "2017-10-09 10:26:29.574321"], ["address", "15 Yeo St, Neutral Bay NSW 2089, Australia"]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "bookings" SET "user_id" = $1, "updated_at" = $2 WHERE "bookings"."id" = $3[0m  [["user_id", 5], ["updated_at", "2017-10-09 10:26:29.581170"], ["id", 15]]
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+No template found for BookingsController#create, rendering head :no_content
+Completed 204 No Content in 1408ms (ActiveRecord: 11.7ms)
+
+
+Started POST "/trips" for 10.0.2.2 at 2017-10-09 06:26:48 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by TripsController#create as JSON
+  Parameters: {"trip"=>{"address"=>"433 Alfred St N, Neutral Bay NSW 2089, Australia", "latitude"=>"-33.8332364", "longtitude"=>"151.2126142"}}
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (3.1ms)[0m  [1m[32mINSERT INTO "trips" ("user_id", "created_at", "updated_at", "address", "latitude", "longtitude") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["user_id", 4], ["created_at", "2017-10-09 10:26:48.768756"], ["updated_at", "2017-10-09 10:26:48.768756"], ["address", "433 Alfred St N, Neutral Bay NSW 2089, Australia"], ["latitude", -33.8332364], ["longtitude", 151.2126142]]
+  [1m[35m (1.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mBooking Load (0.7ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings"[0m
+Completed 200 OK in 265ms (Views: 4.5ms | ActiveRecord: 14.5ms)
+
+
+Started DELETE "/login" for 10.0.2.2 at 2017-10-09 06:29:05 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SessionController#destroy as HTML
+  Parameters: {"authenticity_token"=>"EA9WfYTpZSEDIFgBu3u2OY4rkYQzZO/tqvXD6cBmys4zkKgb0/aayPHwXUX1DxlmHHcqmSVqwFlgrH8ieb5e2g=="}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Completed 302 Found in 6ms (ActiveRecord: 0.8ms)
+
+
+Started GET "/" for 10.0.2.2 at 2017-10-09 06:29:05 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by PagesController#home as HTML
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 510ms (Views: 509.1ms | ActiveRecord: 0.0ms)
+
+
+Started DELETE "/login" for 10.0.2.2 at 2017-10-09 06:29:13 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SessionController#destroy as HTML
+  Parameters: {"authenticity_token"=>"1MSzQ8j5oXG9ROiQeHYJNp0YgMZSdYXRxYY4N4UWcUEUhd0X8V2M7CXLqlBbVrbxUyHfbnKH+ZCtNXjZwQXqKw=="}
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Completed 302 Found in 6ms (ActiveRecord: 0.8ms)
+
+
+Started GET "/" for 10.0.2.2 at 2017-10-09 06:29:14 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by PagesController#home as HTML
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (2.4ms)
+Completed 200 OK in 689ms (Views: 687.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 10.0.2.2 at 2017-10-09 06:48:26 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by PagesController#home as HTML
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (7.0ms)
+Completed 200 OK in 684ms (Views: 677.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/login" for 10.0.2.2 at 2017-10-09 06:48:32 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SessionController#new as HTML
+  Rendering session/new.html.erb within layouts/application
+  Rendered session/new.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 465ms (Views: 464.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for 10.0.2.2 at 2017-10-09 06:48:38 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SessionController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"k4BAWkw/CBNYtA2maAyZ9V/tBQqiak1zaFO9E/qjvudZ9BTxIbrJDxDo76bOCWxgD6aV18SX0/KehHRiakm9ig==", "email"=>"kane@ga.co", "password"=>"[FILTERED]", "commit"=>"Login"}
+  [1m[36mUser Load (1.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "kane@ga.co"], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Completed 302 Found in 166ms (ActiveRecord: 11.1ms)
+
+
+Started GET "/" for 10.0.2.2 at 2017-10-09 06:48:38 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by PagesController#home as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (0.7ms)
+Completed 200 OK in 278ms (Views: 219.4ms | ActiveRecord: 2.3ms)
+
+
+Started POST "/trips" for 10.0.2.2 at 2017-10-09 06:48:51 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by TripsController#create as JSON
+  Parameters: {"trip"=>{"address"=>"12 Redfern St, Redfern NSW 2016, Australia", "latitude"=>"-33.8930003", "longtitude"=>"151.207172"}}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (3.6ms)[0m  [1m[32mINSERT INTO "trips" ("user_id", "created_at", "updated_at", "address", "latitude", "longtitude") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["user_id", 5], ["created_at", "2017-10-09 10:48:52.337586"], ["updated_at", "2017-10-09 10:48:52.337586"], ["address", "12 Redfern St, Redfern NSW 2016, Australia"], ["latitude", -33.8930003], ["longtitude", 151.207172]]
+  [1m[35m (3.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mBooking Load (2.2ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings"[0m
+Completed 200 OK in 506ms (Views: 6.3ms | ActiveRecord: 14.5ms)
+
+
