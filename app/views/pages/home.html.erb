@@ -2,6 +2,7 @@
 
 <div class="container">
   <% if @current_user.present? %>
+    <p>Welcome back, <%= @current_user.name %></p>
     <div class="bookingCreate">
       <h3>Find a Dog Walker!</h3>
       <input type="text" id="bookingAddress" placeholder="Address. Leave blank for home address."/>
@@ -151,9 +152,67 @@
             longtitude: addressObj.lng
           }},
           // The AJAX request will return a list of all the bookings
-          success: function(r) {
-            var bookings = r.bookings;
-            console.log(bookings);
+          success: function(response) {
+            var bookings = response.bookings;
+            var origin = { lat: addressObj.lat, lng: addressObj.lng };
+            var destinations = [];
+            for (var i = 0; i < bookings.length; i++) {
+              destinations.push({ lat: bookings[i].latitude, lng: bookings[i].longtitude });
+            }
+            // Make an array of objects which will have an address key and distance key to better associate the 2.
+            var distances = [];
+
+
+            // Use Google Maps Distance Matrix API to get the distances between all the bookings and this trip.
+            var distanceService = new google.maps.DistanceMatrixService;
+
+            distanceService.getDistanceMatrix({
+              origins: [origin],
+              destinations: destinations,
+              travelMode: 'WALKING'
+            }, function(response, status) {
+              for (var i = 0; i < response.destinationAddresses.length; i++) {
+                distances.push({
+                  address: response.destinationAddresses[i],
+                  distance: response.rows[0].elements[i].distance.value
+                });
+              }
+              // It would seem as though the API returns the distances sorted, but just to double check let's chuck a function in to do it.
+              distances = distances.sort(function(a, b) {
+                return a.distance - b.distance;
+              });
+
+              console.log("SORTED:", distances);
+
+              // Now let's drop the array to have only the closest 3 bookings.
+              while (distances.length > 3) {
+                distances.pop();
+              }
+
+              var locations = [];
+
+              var geocoder = new google.maps.Geocoder();
+              // Now let's geocode and add a marker at each of these locations!
+              for (var i = 0; i < distances.length; i++) {
+                geocoder.geocode({ 'address': distances[i].address }, function(geoResult, geoStatus) {
+                  locations.push ({
+                    lat: geoResult[0].geometry.location.lat(),
+                    lng: geoResult[0].geometry.location.lng()
+                  });
+                  var pickUpMarker = new google.maps.Marker({
+                    position: { lat: geoResult[0].geometry.location.lat(), lng: geoResult[0].geometry.location.lng() },
+                    map: map,
+                    title: `Dog`
+                  });
+                });
+
+              }
+              console.log("GEOCODED", locations);
+
+
+            });
+
+
           },
           error: function(e) {
             debugger
