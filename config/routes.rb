@@ -21,7 +21,7 @@
 #        login GET    /login(.:format)             session#new
 #              POST   /login(.:format)             session#create
 #              DELETE /login(.:format)             session#destroy
-# 
+#
 
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
@@ -29,9 +29,10 @@ Rails.application.routes.draw do
 
   resources :users
   resources :bookings
+  resources :trips
 
   get '/login' => 'session#new'
   post '/login' => 'session#create'
   delete '/login' => 'session#destroy'
-  
+
 end

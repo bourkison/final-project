@@ -1,10 +1,6 @@
 class BookingsController < ApplicationController
 
   def new
-    respond_to do |format|
-      format.html
-      format.json
-    end
   end
 
   # POST request to /bookings.json

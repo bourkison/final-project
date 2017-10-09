@@ -135,6 +135,31 @@
 
         $('.bookingCreate').css('display', 'none');
 
+        if (addressObj.address === '') {
+          addressObj.lat = <%= @current_user.latitude %>;
+          addressObj.lng = <%= @current_user.longtitude %>;
+          addressObj.address = "<%= @current_user.address %>";
+        }
+
+        $.ajax({
+          url: '/trips',
+          method: 'POST',
+          dataType: 'json',
+          data: { trip: {
+            address: addressObj.address,
+            latitude: addressObj.lat,
+            longtitude: addressObj.lng
+          }},
+          // The AJAX request will return a list of all the bookings
+          success: function(r) {
+            var bookings = r.bookings;
+            console.log(bookings);
+          },
+          error: function(e) {
+            debugger
+          }
+        });
+
       });
    <% end %>
   }
