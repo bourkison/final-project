@@ -13,3 +13,6 @@ u1 = User.create :name => 'Harrison Bourke', :email => 'harry@ga.co', :descripti
 u2 = User.create :name => 'Matt Edge', :email => 'kane@ga.co', :description => 'Absolutely love my dog Whiskey, but down to make friends with some new dogs!', :password => 'chicken', :password_confirmation => 'chicken', :address => '12 Redfern St, Redfern NSW 2016, Australia', :latitude => -33.8930003, :longtitude => 151.207172
 
 u3 = User.create :name => 'Richie Stanton', :email => 'richie@ga.co', :description => 'Love looking after dogs - often get paid to do so!', :password => 'chicken', :password_confirmation => 'chicken', :address => '51 Spofforth St, Mosman NSW 2088, Australia', :latitude => -33.8325518, :longtitude => 151.22944889999997
+
+
+Booking.destroy_all

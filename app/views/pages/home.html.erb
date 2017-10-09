@@ -2,8 +2,19 @@
 
 <div class="container">
   <% if @current_user.present? %>
-      <input type="text" id="addr" placeholder="Address. Leave blank for home address."/>
-      <button>Book Dog Walk!</button>
+    <div class="bookingCreate">
+      <h3>Find a Dog Walker!</h3>
+      <input type="text" id="bookingAddress" placeholder="Address. Leave blank for home address."/>
+      <button class="bookButton">Book Dog Walk!</button>
+      <div id="bookingSuccess"></div>
+    </div>
+
+    <div class="tripCreate">
+      <h3>Walk Some Dogs!</h3>
+      <input type="text" id="tripAddress" placeholder="Starting address. Leave blank for home address."/>
+      <button class="tripButton">Find Dogs To Walk!</button>
+      <div id="tripSuccess"></div>
+    </div>
   <% end %>
 </div>
 
@@ -22,7 +33,7 @@
     };
 
     // Create a map object and specify the DOM element for display.
-    var map = new google.maps.Map(document.getElementById('map'), {
+    var map = new google.maps.Map($("#map")[0], {
       center: addr,
       zoom: 15
     });
@@ -54,45 +65,76 @@
         new google.maps.LatLng(-33, 152)
       );
 
-      var $input = $("#addr");
+      var $bookingInput = $("#bookingAddress");
+      var $tripInput = $("#tripAddress");
+
       var options = {
         bounds: defaultBounds,
         types: ['address']
       };
 
-      autocomplete = new google.maps.places.Autocomplete($input[0], options);
+      var bookingAutocomplete = new google.maps.places.Autocomplete($bookingInput[0], options);
+      var tripAutocomplete = new google.maps.places.Autocomplete($tripInput[0], options);
 
-      autocomplete.addListener('place_changed', function() {
-        googObj = autocomplete.getPlace();
+
+
+      bookingAutocomplete.addListener('place_changed', function() {
+        googObj = bookingAutocomplete.getPlace();
         addressObj.address = googObj.formatted_address;
         addressObj.lat = googObj.geometry.location.lat();
         addressObj.lng = googObj.geometry.location.lng();
       });
 
-      $('button').click(function(e) {
+      tripAutocomplete.addListener('place_changed', function() {
+        googObj = tripAutocomplete.getPlace();
+        addressObj.address = googObj.formatted_address;
+        addressObj.lat = googObj.geometry.location.lat();
+        addressObj.lng = googObj.geometry.location.lng();
+        console.log(addressObj);
+      });
+
+
+
+      // CODE FOR ADDING A BOOKING.
+      $('.bookButton').click(function(e) {
         e.preventDefault();
+
+        $('.tripCreate').css('display', 'none');
 
         if (addressObj.address === '') {
           addressObj.lat = <%= @current_user.latitude %>;
           addressObj.lng = <%= @current_user.longtitude %>;
           addressObj.address = "<%= @current_user.address %>";
         }
-        // debugger
+
+
         $.ajax({
           url: '/bookings',
           method: 'POST',
           data: { booking: {
+            address: addressObj.address,
             latitude: addressObj.lat,
             longtitude: addressObj.lng
           }},
-          success: function(e) {
-            console.log(e);
-            debugger;
+          success: function() {
+            $("#bookingSuccess").html("<p>Booking successfully made. Finding dog walker...</p>");
+            console.log("Booking created!");
           },
           error: function( e ){
             debugger
           }
         });
+      });
+
+
+
+
+      // CODE FOR ADDING A TRIP AND FINDING BOOKINGS.
+      $('.tripButton').click(function(e) {
+        e.preventDefault();
+
+        $('.bookingCreate').css('display', 'none');
+
       });
    <% end %>
   }
