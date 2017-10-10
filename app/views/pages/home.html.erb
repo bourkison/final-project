@@ -95,6 +95,7 @@
       });
 
 
+      var newBooking;
 
       // CODE FOR ADDING A BOOKING.
       $('.bookButton').click(function(e) {
@@ -117,15 +118,60 @@
             latitude: addressObj.lat,
             longtitude: addressObj.lng
           }},
-          success: function() {
-            $("#bookingSuccess").html("<p>Booking successfully made. Finding dog walker...</p>");
-            console.log("Booking created!");
+          dataType: 'json',
+          success: function(response) {
+            $("#bookingSuccess").html("<p>Booking successfully made. Finding dog walker... <button id='cancelBooking'>Cancel</button></p>");
+
+            newBooking = response.booking;
+
+            $("#cancelBooking").click(function(e) {
+              e.preventDefault();
+              console.log(e);
+              $('.tripCreate').css('display', 'block');
+              $("#bookingSuccess").html("");
+              $.ajax({
+                url: '/bookings/' + newBooking.id,
+                method: 'DELETE',
+                success: function() {
+                  console.log("Booking #" + newBooking.id + " deleted!");
+                },
+                error: function(e) {
+                  console.log(e);
+                }
+              });
+            });
+
+            // We are now going to keep submitting post requests every 5 seconds to see if the booking has a trip id. If it does then that means it has been associated with a trip, and hence a walker is on their way.
+            fetchBooking();
           },
           error: function( e ){
             debugger
           }
         });
       });
+
+      var fetchBooking = function() {
+        console.log("Searching for dog walker");
+        $.ajax({
+          url: '/bookings/' + newBooking.id,
+          method: 'GET',
+          dataType: 'json',
+          success: function(response) {
+            console.log(response);
+            if (response.booking.picked_up !== null) {
+              $("#bookingSuccess").html("<p>Dog walker is currently walking your dog!</p>");
+            } else {
+              if (response.booking.trip_id !== null) {
+                $("#bookingSuccess").html("<p>Dog walker is currently on their way!<p>");
+              }
+              setTimeout( fetchBooking, 5000 );
+            }
+          },
+          error: function(e) {
+            console.log(e);
+          }
+        });
+      }
 
 
       var distances = [];
@@ -302,7 +348,9 @@
 
 
         // Now we need to make an AJAX request to set the booking and shiz. In our trip info there's a way point order which will show us which element in locations array it is using. But only if we are on the next tripWaypoint.
-        if (tripWaypoint > 0 && tripWaypoint < tripInfo.routes[0].legs.length - 2) {
+        console.log(tripWaypoint);
+        console.log(tripInfo.routes[0].legs.length);
+        if (tripWaypoint > 0 && tripWaypoint < tripInfo.routes[0].legs.length) {
           var orderArray = tripInfo.routes[0].waypoint_order
           var currBookingId = locations[orderArray[tripWaypoint]].bookingId;
           console.log("CURRENT BOOKING ID", currBookingId)
@@ -311,7 +359,7 @@
             method: 'PUT',
             // data: { _method: 'PUT' },
             success: function() {
-              console.log("Dog picked up!");
+              console.log("Dog picked up!", currBookingId);
             },
             error: function(e) {
               console.log(e);

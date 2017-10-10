@@ -14,5 +14,25 @@ u2 = User.create :name => 'Matt Edge', :email => 'matt@ga.co', :description => '
 
 u3 = User.create :name => 'Richie Stanton', :email => 'richie@ga.co', :description => 'Love looking after dogs - often get paid to do so!', :password => 'chicken', :password_confirmation => 'chicken', :address => '51 Spofforth St, Mosman NSW 2088, Australia', :latitude => -33.8325518, :longtitude => 151.22944889999997
 
+u4 = User.create :name => 'Kane Mott', :email => 'kane@ga.co', :description => 'Don\'t have any dogs of my own, hence keen to make some friends with other people\'s!', :password => 'chicken', :password_confirmation => 'chicken', :address => '12 Penrith Ave, Wheeler Heights NSW 2097, Australia', :latitude => -33.732427, :longtitude => 151.2794176
+
 
 Booking.destroy_all
+
+b1 = Booking.create :address => "15 Yeo St, Neutral Bay NSW 2089, Australia", :latitude => -33.8319004, :longtitude => 151.2169825
+
+b2 = Booking.create :address => "12 Penrith Ave, Wheeler Heights NSW 2097, Australia", :latitude => -33.732427, :longtitude => 151.2794176
+
+b3 = Booking.create :address => "2 Lindsay St, Neutral Bay NSW 2089, Australia", :latitude => -33.8332423, :longtitude => 151.217527
+
+b4 = Booking.create :address => "1 Rose Ave, North Sydney NSW 2060, Australia", :latitude => -33.8325663, :longtitude => 151.2136604
+
+Trip.destroy_all
+
+
+# ASSociations
+
+u1.bookings << b1
+u2.bookings << b2
+u3.bookings << b3
+u4.bookings << b4

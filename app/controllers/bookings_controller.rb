@@ -10,13 +10,24 @@ class BookingsController < ApplicationController
       b = @current_user.bookings.last
       b.destroy if b.dropped_off.blank?
     end
-    @booking = Booking.create booking_params
+    booking = Booking.create booking_params
 
-    @current_user.bookings << @booking
+    @current_user.bookings << booking
 
     respond_to do |format|
       format.html {}
-      format.json { render json: @booking }
+      format.json { render json: {:booking => booking} }
+    end
+  end
+
+
+  # GET request to /bookings/:id.json
+  def show
+    booking = Booking.find params[:id]
+
+    respond_to do |format|
+      format.html {}
+      format.json { render json: {:booking => booking} }
     end
   end
 
@@ -25,20 +36,33 @@ class BookingsController < ApplicationController
   def update
     # We are going to be making 2 requests to this method. The first to let the user now that their dog is now in a trip, and the second to update the server that the dog has been picked up.
     booking = Booking.find params[:id]
-    puts booking
-    if booking.trip.blank?
+    if booking.trip_id.nil?
       @current_user.trips.last.bookings << booking
       respond_to do |format|
         format.html {}
         format.json { render status: :created }
       end
     else
-      booking.picked_up = Time.now
+      booking.update(picked_up: DateTime.current)
+      p '******************************'
+      p booking
 
       respond_to do |format|
         format.html {}
         format.json { render status: :created }
       end
+    end
+  end
+
+
+  # DELETE request to /bookings/:id
+  def destroy
+    booking = Booking.find params[:id]
+    booking.destroy
+
+    respond_to do |format|
+      format.html {}
+      format.json { render status: :created }
     end
   end
 
