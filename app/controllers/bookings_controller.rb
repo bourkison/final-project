@@ -20,6 +20,28 @@ class BookingsController < ApplicationController
     end
   end
 
+
+  # PUT/PATCH request to /bookings/:id.json
+  def update
+    # We are going to be making 2 requests to this method. The first to let the user now that their dog is now in a trip, and the second to update the server that the dog has been picked up.
+    booking = Booking.find params[:id]
+    puts booking
+    if booking.trip.blank?
+      @current_user.trips.last.bookings << booking
+      respond_to do |format|
+        format.html {}
+        format.json { render status: :created }
+      end
+    else
+      booking.picked_up = Time.now
+
+      respond_to do |format|
+        format.html {}
+        format.json { render status: :created }
+      end
+    end
+  end
+
   private
   def booking_params
     params.require(:booking).permit(:latitude, :longtitude, :address)

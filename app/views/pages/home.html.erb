@@ -129,7 +129,6 @@
 
 
       var distances = [];
-      var geocodePromises = [];
       var locations = [];
       var bookings = [];
       var origin;
@@ -165,7 +164,7 @@
             origin = { lat: addressObj.lat, lng: addressObj.lng };
             var destinations = [];
             for (var i = 0; i < bookings.length; i++) {
-              destinations.push({ lat: bookings[i].latitude, lng: bookings[i].longtitude });
+              destinations.push({ lat: bookings[i].latitude, lng: bookings[i].longtitude});
             }
             // Make an array of objects which will have an address key and distance key to better associate the 2.
             distances = [];
@@ -182,7 +181,8 @@
               for (var i = 0; i < response.destinationAddresses.length; i++) {
                 distances.push({
                   address: response.destinationAddresses[i],
-                  distance: response.rows[0].elements[i].distance.value
+                  distance: response.rows[0].elements[i].distance.value,
+                  booking_id: bookings[i].id
                 });
               }
               // It would seem as though the API returns the distances sorted, but just to double check let's chuck a function in to do it.
@@ -204,7 +204,7 @@
                 geocoder.geocode({ 'address': distances[i].address }, function(geoResult, geoStatus) {
                   locations.push ({
                     lat: geoResult[0].geometry.location.lat(),
-                    lng: geoResult[0].geometry.location.lng()
+                    lng: geoResult[0].geometry.location.lng(),
                   });
                   continueTripSetup();
                 });
@@ -225,11 +225,26 @@
 
         var waypoints = [];
         for (i = 0; i < locations.length; i++) {
+          locations[i].bookingId = distances[i].booking_id
           waypoints.push({
             location: locations[i],
             stopover: true
           });
+
+          $.ajax({
+            url: '/bookings/' + locations[i].bookingId,
+            method: 'PUT',
+            // data: { _method: 'PUT' },
+            success: function() {
+              console.log("Association added!");
+            },
+            error: function(e) {
+              console.log(e);
+            }
+          });
         }
+
+        // console.log("LOCATIONS", locations);
 
         var directionsService = new google.maps.DirectionsService;
         var directionsDisplay = new google.maps.DirectionsRenderer;
@@ -257,6 +272,7 @@
             optimizeWaypoints: true
           }, function(response, status) {
             tripInfo = response;
+            // console.log("DIRECTION SERVICE RESPONSE", tripInfo);
             // Now let's get rid of the home marker.
             homeMarker.setMap(null);
             directionsDisplay.setDirections(response);
@@ -269,7 +285,6 @@
       }
 
       var printDirectionInstructions = function() {
-
         var infoString = "<ul>";
         var temp = tripInfo.routes[0].legs[tripWaypoint];
         for (i = 0; i < temp.steps.length; i ++) {
@@ -284,6 +299,25 @@
         $("#tripSuccess").html(infoString);
 
         $("#nextStop").click(nextStopFunc);
+
+
+        // Now we need to make an AJAX request to set the booking and shiz. In our trip info there's a way point order which will show us which element in locations array it is using. But only if we are on the next tripWaypoint.
+        if (tripWaypoint > 0 && tripWaypoint < tripInfo.routes[0].legs.length - 2) {
+          var orderArray = tripInfo.routes[0].waypoint_order
+          var currBookingId = locations[orderArray[tripWaypoint]].bookingId;
+          console.log("CURRENT BOOKING ID", currBookingId)
+          $.ajax({
+            url: '/bookings/' + currBookingId,
+            method: 'PUT',
+            // data: { _method: 'PUT' },
+            success: function() {
+              console.log("Dog picked up!");
+            },
+            error: function(e) {
+              console.log(e);
+            }
+          });
+        }
       }
 
       var nextStopFunc = function(e) {
