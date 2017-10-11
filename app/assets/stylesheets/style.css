@@ -1,8 +1,24 @@
 input[type="text"] {
-  width: 400px;
+  min-width: 100px;
+  width: 70%;
+  font-size: 16px;
 }
 
-/*.welcome {
+button {
+  max-width: 25%;
+  font-size: 16px;
+}
+
+nav {
+  height: 1%;
+  text-align: right;
+}
+
+.container {
+  height: 20%;
+}
+
+.welcome {
   width: 100%
 }
 
@@ -16,6 +32,13 @@ input[type="text"] {
 .tripCreate {
   width: 50%;
   float: right;
-  text-align: right;
+  text-align: left;
   display: inline;
-}*/
+}
+
+#tripSuccess {
+  display: none;
+  height: 60%;
+  width: 50%;
+  overflow: scroll;
+}
