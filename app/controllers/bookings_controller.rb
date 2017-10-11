@@ -25,16 +25,24 @@ class BookingsController < ApplicationController
   def show
     booking = Booking.find params[:id]
 
-    respond_to do |format|
-      format.html {}
-      format.json { render json: {:booking => booking} }
+    if booking.trip.present?
+      user = booking.trip.user
+      respond_to do |format|
+        format.html {}
+        format.json { render json: {:booking => booking, :user => user} }
+      end
+    else
+      respond_to do |format|
+        format.html {}
+        format.json { render json: {:booking => booking} }
+      end
     end
   end
 
 
   # PUT/PATCH request to /bookings/:id.json
   def update
-    # We are going to be making 2 requests to this method. The first to let the user now that their dog is now in a trip, and the second to update the server that the dog has been picked up.
+    # We are going to be making 3 requests to this method. The first to let the user now that their dog is now in a trip, the second to update the server that the dog has been picked up, and the third to let the database now the dog has been dropped off.
     booking = Booking.find params[:id]
     if booking.trip_id.nil?
       @current_user.trips.last.bookings << booking
@@ -42,10 +50,15 @@ class BookingsController < ApplicationController
         format.html {}
         format.json { render status: :created }
       end
-    else
+    elsif booking.picked_up.nil?
       booking.update(picked_up: DateTime.current)
-      p '******************************'
-      p booking
+
+      respond_to do |format|
+        format.html {}
+        format.json { render status: :created }
+      end
+    else
+      booking.update(dropped_off: DateTime.current)
 
       respond_to do |format|
         format.html {}

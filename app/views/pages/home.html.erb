@@ -14,8 +14,8 @@
       <h3>Walk Some Dogs!</h3>
       <input type="text" id="tripAddress" placeholder="Starting address. Leave blank for home address."/>
       <button class="tripButton">Find Dogs To Walk!</button>
-      <div id="tripSuccess"></div>
     </div>
+    <div id="tripSuccess"></div>
   <% end %>
 </div>
 
@@ -126,7 +126,6 @@
 
             $("#cancelBooking").click(function(e) {
               e.preventDefault();
-              console.log(e);
               $('.tripCreate').css('display', 'block');
               $("#bookingSuccess").html("");
               $.ajax({
@@ -151,18 +150,20 @@
       });
 
       var fetchBooking = function() {
-        console.log("Searching for dog walker");
         $.ajax({
           url: '/bookings/' + newBooking.id,
           method: 'GET',
           dataType: 'json',
           success: function(response) {
-            console.log(response);
-            if (response.booking.picked_up !== null) {
-              $("#bookingSuccess").html("<p>Dog walker is currently walking your dog!</p>");
+            if (response.booking.dropped_off !== null) {
+              $("#bookingSuccess").html('<p>Dog safely droppped off! We hope you enjoyed using Ubog.')
+            } else if (response.booking.picked_up !== null) {
+              $("#bookingSuccess").html("<p>Dog walker, " + response.user.name + ", is currently walking your dog!</p>");
+              // Now we wan't to  keep submitting requests to see if the trip is done, however as this is less important we can do it less frequently.
+              setTimeout( fetchBooking, 20000 );
             } else {
               if (response.booking.trip_id !== null) {
-                $("#bookingSuccess").html("<p>Dog walker is currently on their way!<p>");
+                $("#bookingSuccess").html("<p>Dog walker, " + response.user.name + ", is currently on their way!<p>");
               }
               setTimeout( fetchBooking, 5000 );
             }
@@ -179,6 +180,8 @@
       var bookings = [];
       var origin;
       var tripInfo;
+      var reverseTripInfo;
+      var directionsDisplay = new google.maps.DirectionsRenderer;
       // tripWaypoint is a number which keeps track of which step the dog walker is up to.
       var tripWaypoint = 0;
 
@@ -188,6 +191,7 @@
         e.preventDefault();
 
         $('.bookingCreate').css('display', 'none');
+        $('.tripCreate').html('<p>Finding dogs to be picked up in your area.</p>');
 
         if (addressObj.address === '') {
           addressObj.lat = <%= @current_user.latitude %>;
@@ -293,7 +297,6 @@
         // console.log("LOCATIONS", locations);
 
         var directionsService = new google.maps.DirectionsService;
-        var directionsDisplay = new google.maps.DirectionsRenderer;
 
         directionsDisplay.setMap(map);
 
@@ -321,16 +324,26 @@
             // console.log("DIRECTION SERVICE RESPONSE", tripInfo);
             // Now let's get rid of the home marker.
             homeMarker.setMap(null);
-            directionsDisplay.setDirections(response);
-            var route = response.routes[0];
+            directionsDisplay.setDirections(tripInfo);
+            var route = tripInfo.routes[0];
             printDirectionInstructions();
           });
+          // Now we want to save the directions for heading home as well.
+          directionsService.route({
+            origin: destination,
+            destination: origin,
+            waypoints: waypoints,
+            travelMode: 'WALKING',
+            optimizeWaypoints: true
+          }, function(response, status) {
+            reverseTripInfo = response;
+          });
         });
-
-
       }
 
       var printDirectionInstructions = function() {
+        console.log(tripInfo);
+        $('.tripCreate').html('');
         var infoString = "<ul>";
         var temp = tripInfo.routes[0].legs[tripWaypoint];
         for (i = 0; i < temp.steps.length; i ++) {
@@ -340,19 +353,23 @@
 
         if (tripWaypoint !== tripInfo.routes[0].legs.length - 1) {
           infoString += "<button id='nextStop'>Next Step</button>"
+        } else {
+          infoString += "<button id='doneWalkToPark'>Head Back</button>"
         }
         // Let's give the user the information, then add a button to get them to the next step.
         $("#tripSuccess").html(infoString);
 
         $("#nextStop").click(nextStopFunc);
+        $("#doneWalkToPark").click(reverseRoute);
 
 
         // Now we need to make an AJAX request to set the booking and shiz. In our trip info there's a way point order which will show us which element in locations array it is using. But only if we are on the next tripWaypoint.
-        console.log(tripWaypoint);
-        console.log(tripInfo.routes[0].legs.length);
         if (tripWaypoint > 0 && tripWaypoint < tripInfo.routes[0].legs.length) {
           var orderArray = tripInfo.routes[0].waypoint_order
-          var currBookingId = locations[orderArray[tripWaypoint]].bookingId;
+          console.log(locations);
+          console.log(tripWaypoint - 1);
+          console.log(orderArray);
+          var currBookingId = locations[orderArray[tripWaypoint - 1]].bookingId;
           console.log("CURRENT BOOKING ID", currBookingId)
           $.ajax({
             url: '/bookings/' + currBookingId,
@@ -373,6 +390,59 @@
         tripWaypoint++;
         printDirectionInstructions();
       };
+
+
+
+      var printReverseDirectionInstructions = function() {
+        var infoString = "<ul>";
+        var temp = reverseTripInfo.routes[0].legs[tripWaypoint];
+        for (i = 0; i < temp.steps.length; i ++) {
+          infoString += "<li>" + temp.steps[i].instructions + "</li>"
+        }
+        infoString += "</ul>"
+
+        if (tripWaypoint !== reverseTripInfo.routes[0].legs.length - 1) {
+          infoString += "<button id='nextReverseStop'>Next Step</button>"
+        } else {
+          infoString += "<button id='doneWalk'>Done!</button>"
+        }
+
+        // We are now going to set dropped_off.
+        if (tripWaypoint > 0 && tripWaypoint < reverseTripInfo.routes[0].legs.length) {
+          var orderArray = reverseTripInfo.routes[0].waypoint_order
+          // This is gross but is basically getting the correct location index for the dog that is being dropped off (we have to reverse the order hence the locations.length - 1 -)
+          var currBookingId = locations[orderArray[tripWaypoint - 1]].bookingId;
+          $.ajax({
+            url: '/bookings/' + currBookingId,
+            method: 'PUT',
+            // data: { _method: 'PUT' },
+            success: function() {
+              console.log("Dog dropped off!", currBookingId);
+            },
+            error: function(e) {
+              console.log(e);
+            }
+          });
+        }
+        $("#tripSuccess").html(infoString);
+        $("#nextReverseStop").click(nextReverseStopFunc);
+      }
+
+
+      var nextReverseStopFunc = function(e) {
+        e.preventDefault();
+        tripWaypoint++;
+        printReverseDirectionInstructions();
+      }
+
+      var reverseRoute = function(e) {
+        e.preventDefault();
+        tripWaypoint = 0;
+        directionsDisplay.setDirections(reverseTripInfo);
+        console.log(reverseTripInfo);
+        printReverseDirectionInstructions();
+        console.log("WORKING");
+      }
    <% end %>
   }
 
