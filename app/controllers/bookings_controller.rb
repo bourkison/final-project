@@ -1,8 +1,5 @@
 class BookingsController < ApplicationController
 
-  def new
-  end
-
   # POST request to /bookings.json
   def create
     # Before creating a new booking, let's check if the last booking is still active, if so let's destroy it.

@@ -1,8 +1,5 @@
 class TripsController < ApplicationController
 
-  def new
-  end
-
   def create
     @trip = Trip.create trip_params
     @current_user.trips << @trip

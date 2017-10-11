@@ -211,10 +211,14 @@
           // The AJAX request will return a list of all the bookings
           success: function(response) {
             bookings = response.bookings;
+            console.log(bookings);
             origin = { lat: addressObj.lat, lng: addressObj.lng };
             var destinations = [];
             for (var i = 0; i < bookings.length; i++) {
-              destinations.push({ lat: bookings[i].latitude, lng: bookings[i].longtitude});
+              // We need to check that the bookings aren't already completed, nor are they part of a trip. We do this by checking if there is an associaton before pushing into destinations.
+              if (bookings[i].trip_id === null) {
+                destinations.push({ lat: bookings[i].latitude, lng: bookings[i].longtitude});
+              }
             }
             // Make an array of objects which will have an address key and distance key to better associate the 2.
             distances = [];
