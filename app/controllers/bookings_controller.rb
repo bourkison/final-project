@@ -5,7 +5,7 @@ class BookingsController < ApplicationController
     # Before creating a new booking, let's check if the last booking is still active, if so let's destroy it.
     if @current_user.bookings.last.present?
       b = @current_user.bookings.last
-      b.destroy if b.dropped_off.blank?
+      b.destroy if b.dropped_off.nil?
     end
     booking = Booking.create booking_params
 

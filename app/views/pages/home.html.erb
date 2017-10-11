@@ -2,13 +2,13 @@
 
 <div class="container">
   <% if @current_user.present? %>
-    <p>Welcome back, <%= @current_user.name %></p>
+  <p>Welcome back, <%= @current_user.name %></p>
     <div class="bookingCreate">
       <h3>Find a Dog Walker!</h3>
       <input type="text" id="bookingAddress" placeholder="Address. Leave blank for home address."/>
       <button class="bookButton">Book Dog Walk!</button>
-      <div id="bookingSuccess"></div>
     </div>
+    <div id="bookingSuccess"></div>
 
     <div class="tripCreate">
       <h3>Walk Some Dogs!</h3>
@@ -16,7 +16,7 @@
       <button class="tripButton">Find Dogs To Walk!</button>
     </div>
     <div id="tripSuccess"></div>
-  <% end %>
+    <% end %>
 </div>
 
 
@@ -107,6 +107,16 @@
           addressObj.lat = <%= @current_user.latitude %>;
           addressObj.lng = <%= @current_user.longtitude %>;
           addressObj.address = "<%= @current_user.address %>";
+        } else {
+          homeMarker.setPosition({
+            lat: addressObj.lat,
+            lng: addressObj.lng
+          });
+
+          map.panTo({
+            lat: addressObj.lat,
+            lng: addressObj.lng
+          });
         }
 
 
@@ -197,6 +207,11 @@
           addressObj.lat = <%= @current_user.latitude %>;
           addressObj.lng = <%= @current_user.longtitude %>;
           addressObj.address = "<%= @current_user.address %>";
+        } else {
+          homeMarker.setPosition({
+            lat: addressObj.lat,
+            lng: addressObj.lng
+          });
         }
 
         $.ajax({

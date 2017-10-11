@@ -1,5 +1,21 @@
 input[type="text"] {
-
   width: 400px;
-
 }
+
+/*.welcome {
+  width: 100%
+}
+
+.bookingCreate {
+  width: 50%;
+  float: left;
+  text-align: left;
+  display: inline;
+}
+
+.tripCreate {
+  width: 50%;
+  float: right;
+  text-align: right;
+  display: inline;
+}*/
