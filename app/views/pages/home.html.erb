@@ -202,7 +202,7 @@
 
         $('#tripSuccess').css('display', 'block');
         $('.bookingCreate').css('display', 'none');
-        $('.tripCreate').html('<p>Finding dogs to be picked up in your area.</p>');
+        $('#tripSuccess').html('<p>Finding dogs to be picked up in your area.</p>');
 
         if (addressObj.address === '') {
           addressObj.lat = <%= @current_user.latitude %>;

@@ -31888,3 +31888,28 @@ No template found for BookingsController#update, rendering head :no_content
 Completed 204 No Content in 761ms (ActiveRecord: 2.7ms)
 
 
+Started DELETE "/login" for 10.0.2.2 at 2017-10-12 01:20:07 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SessionController#destroy as HTML
+  Parameters: {"authenticity_token"=>"L9xRFTPbhdBFHxdjJRIsIFxJo1KhB8z0POWKi7HkRZw4ce4TUdMxArw+W1XPjeH19HT9VEkTtE6DDAqBP/LuJg=="}
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 124], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Completed 302 Found in 6ms (ActiveRecord: 0.7ms)
+
+
+Started GET "/" for 10.0.2.2 at 2017-10-12 01:20:08 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by PagesController#home as HTML
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 489ms (Views: 487.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for 10.0.2.2 at 2017-10-12 01:20:12 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by UsersController#new as HTML
+  Rendering users/new.html.erb within layouts/application
+  Rendered users/new.html.erb within layouts/application (122.9ms)
+Completed 200 OK in 462ms (Views: 461.3ms | ActiveRecord: 0.0ms)
+
+

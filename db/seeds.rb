@@ -19,13 +19,13 @@ u4 = User.create :name => 'Kane Mott', :email => 'kane@ga.co', :description => '
 
 Booking.destroy_all
 
-b1 = Booking.create :address => "15 Yeo St, Neutral Bay NSW 2089, Australia", :latitude => -33.8319004, :longtitude => 151.2169825
+b1 = Booking.create :address => "56 York St, Sydney NSW 2000, Australia", :latitude => -33.8698209, :longtitude => 151.20643289999998
 
-b2 = Booking.create :address => "12 Penrith Ave, Wheeler Heights NSW 2097, Australia", :latitude => -33.732427, :longtitude => 151.2794176
+b2 = Booking.create :address => "115 Sussex St, Sydney NSW 2000, Australia", :latitude => -33.8685585, :longtitude => 151.20337240000003
 
-b3 = Booking.create :address => "2 Lindsay St, Neutral Bay NSW 2089, Australia", :latitude => -33.8332423, :longtitude => 151.217527
+b3 = Booking.create :address => "1 Loftus St, Sydney NSW 2000, Australia", :latitude => -33.86235639999999, :longtitude => 151.21024349999993
 
-b4 = Booking.create :address => "1 Rose Ave, North Sydney NSW 2060, Australia", :latitude => -33.8325663, :longtitude => 151.2136604
+b4 = Booking.create :address => "96 Cumberland St, The Rocks NSW 2000, Australia", :latitude => -33.8586684, :longtitude => 151.20743500000003
 
 Trip.destroy_all
 
