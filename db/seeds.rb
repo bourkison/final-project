@@ -23,9 +23,9 @@ b1 = Booking.create :address => "56 York St, Sydney NSW 2000, Australia", :latit
 
 b2 = Booking.create :address => "115 Sussex St, Sydney NSW 2000, Australia", :latitude => -33.8685585, :longtitude => 151.20337240000003
 
-b3 = Booking.create :address => "1 Loftus St, Sydney NSW 2000, Australia", :latitude => -33.86235639999999, :longtitude => 151.21024349999993
+b3 = Booking.create :address => "43 York St, Sydney NSW 2000, Australia", :latitude => -33.86235639999999, :longtitude => 151.21024349999993
 
-b4 = Booking.create :address => "96 Cumberland St, The Rocks NSW 2000, Australia", :latitude => -33.8586684, :longtitude => 151.20743500000003
+b4 = Booking.create :address => "96 Cumberland St, The Rocks NSW 2000, Australia", :latitude => -33.8668014, :longtitude => 151.20557280000003
 
 Trip.destroy_all
 

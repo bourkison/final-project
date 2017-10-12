@@ -182,7 +182,6 @@
     };
 
     var distances = [];
-    var locations = [];
     var bookings = [];
     var origin;
     var tripInfo;
@@ -223,13 +222,11 @@
         // The AJAX request will return a list of all the bookings
         success: function success(response) {
           bookings = response.bookings;
-          console.log(bookings);
           origin = { lat: addressObj.lat, lng: addressObj.lng };
           var destinations = [];
           for (var i = 0; i < bookings.length; i++) {
             // We need to check that the bookings aren't already completed, nor are they part of a trip. We do this by checking if there is an associaton before pushing into destinations.
             if (bookings[i].trip_id === null) {
-              // destinations.push({ lat: bookings[i].latitude, lng: bookings[i].longtitude, ad: bookings[i].address, id: bookings[i].id });
               destinations.push(bookings[i].address)
             }
           }
@@ -244,37 +241,25 @@
             destinations: destinations,
             travelMode: 'WALKING'
           }, function (response, status) {
-            console.log(response);
-            console.log(destinations);
             for (var i = 0; i < response.destinationAddresses.length; i++) {
               for (var j = 0; j < destinations.length; j++) {
                 if (response.destinationAddresses[i] === destinations[j]) {
                   distances.push({
                     address: response.destinationAddresses[i],
                     distance: response.rows[0].elements[i].distance.value,
+                    latitlong: {
+                      lat: bookings[j].latitude,
+                      lng: bookings[j].longtitude
+                    },
                     booking_id: bookings[j].id
                   });
-                  console.log("Check if working:", distances[i])
                   break;
                 }
                }
             }
 
-            setTimeout(500, function(){
-              console.log("Please work");
-            });
-
-            console.log("TEST", destinations);
-            console.log("Dist", distances);
-            console.log("DIst length", distances.length);
-            console.log(distances[3]);
-
             distances = distances.sort(function (a, b) {
               return a.distance - b.distance;
-            });
-
-            setTimeout(500, function(){
-              console.log("Please work");
             });
 
             // Now let's drop the array to have only the closest 3 bookings.
@@ -282,20 +267,8 @@
               distances.pop();
             }
 
-            locations = [];
-
-            var geocoder = new google.maps.Geocoder();
-            // Now let's geocode and add a marker at each of these locations!
-            for (var i = 0; i < distances.length; i++) {
-              geocoder.geocode({ 'address': distances[i].address }, function (geoResult, geoStatus) {
-                console.log("GEO RESULT");
-                locations.push({
-                  lat: geoResult[0].geometry.location.lat(),
-                  lng: geoResult[0].geometry.location.lng()
-                });
-                continueTripSetup();
-              });
-            }
+            // Let's just clean this up a bit and break out of callback hell.
+            continueTripSetup();
           });
         },
         error: function error(e) {
@@ -305,21 +278,16 @@
     });
 
     var continueTripSetup = function continueTripSetup() {
-      // As this function is being called several times, let's back out until all the Geocodes are done.
-      if (locations.length !== distances.length) {
-        return;
-      }
-
       waypoints = [];
-      for (var i = 0; i < locations.length; i++) {
-        locations[i].bookingId = distances[i].booking_id;
+
+      for (var i = 0; i < distances.length; i++) {
         waypoints.push({
-          location: locations[i],
+          location: distances[i].address,
           stopover: true
         });
 
         $.ajax({
-          url: '/bookings/' + locations[i].bookingId,
+          url: '/bookings/' + distances[i].booking_id,
           method: 'PUT',
           // data: { _method: 'PUT' },
           success: function success() {
@@ -341,7 +309,7 @@
       var placesService = new google.maps.places.PlacesService(map);
 
       placesService.nearbySearch({
-        location: locations[locations.length - 1],
+        location: distances[distances.length - 1].latitlong,
         radius: 1000,
         type: ['park']
       }, function (parkResults, parkStatus) {
@@ -358,7 +326,6 @@
           optimizeWaypoints: true
         }, function (response, status) {
           tripInfo = response;
-          // console.log("DIRECTION SERVICE RESPONSE", tripInfo);
           // Now let's get rid of the home marker.
           homeMarker.setMap(null);
           directionsDisplay.setDirections(tripInfo);
@@ -379,7 +346,6 @@
     };
 
     var printDirectionInstructions = function printDirectionInstructions() {
-      console.log(tripInfo);
       $('.tripCreate').html('');
       var infoString = "<ul>";
       var temp = tripInfo.routes[0].legs[tripWaypoint];
@@ -402,16 +368,7 @@
       // Now we need to make an AJAX request to set the booking and shiz. In our trip info there's a way point order which will show us which element in locations array it is using. But only if we are on the next tripWaypoint.
       if (tripWaypoint > 0 && tripWaypoint < tripInfo.routes[0].legs.length) {
         var orderArray = tripInfo.routes[0].waypoint_order;
-        console.log("DEBUGGING:")
-        console.log("Wapoints", waypoints)
-        console.log("Locations", locations);
-        console.log("Trip waypoint", tripWaypoint - 1);
-        console.log("Order array", orderArray);
-        console.log("Thing im chucking into locations", orderArray[tripWaypoint - 1]);
-        console.log("Thing that's returning", locations[orderArray[tripWaypoint - 1]]);
-        var currBookingId = locations[orderArray[tripWaypoint - 1]].bookingId;
-        // var currBookingId = locations[tripWaypoint - 1].bookingId;
-        console.log("CURRENT BOOKING ID", currBookingId);
+        var currBookingId = distances[orderArray[tripWaypoint - 1]].booking_id;
         $.ajax({
           url: '/bookings/' + currBookingId,
           method: 'PUT',
@@ -450,7 +407,7 @@
       if (tripWaypoint > 0 && tripWaypoint < reverseTripInfo.routes[0].legs.length) {
         var orderArray = tripInfo.routes[0].waypoint_order;
         // This is gross but is basically getting the correct location index for the dog that is being dropped off (we have to reverse the order hence the locations.length - 1 -)
-        var currBookingId = locations[orderArray[(locations.length - 1) - (tripWaypoint - 1)]].bookingId;
+        var currBookingId = distances[orderArray[(distances.length - 1) - (tripWaypoint - 1)]].booking_id;
         $.ajax({
           url: '/bookings/' + currBookingId,
           method: 'PUT',
