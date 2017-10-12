@@ -43,8 +43,10 @@
 
 
     <% if @current_user.present? %>
-    addr.lat = <%= @current_user.latitude %>;
-    addr.lng = <%= @current_user.longtitude %>;
+    'use strict';
+
+    addr.lat = /*<%= @current_user.latitude %>*/0;
+    addr.lng = /*<%= @current_user.longtitude %>*/0;
     map.setCenter(addr);
 
     var homeMarker = new google.maps.Marker({
@@ -227,7 +229,7 @@
           for (var i = 0; i < bookings.length; i++) {
             // We need to check that the bookings aren't already completed, nor are they part of a trip. We do this by checking if there is an associaton before pushing into destinations.
             if (bookings[i].trip_id === null) {
-              destinations.push(bookings[i].address)
+              destinations.push(bookings[i].address);
             }
           }
           // Make an array of objects which will have an address key and distance key to better associate the 2.
@@ -255,7 +257,7 @@
                   });
                   break;
                 }
-               }
+              }
             }
 
             distances = distances.sort(function (a, b) {
@@ -407,7 +409,7 @@
       if (tripWaypoint > 0 && tripWaypoint < reverseTripInfo.routes[0].legs.length) {
         var orderArray = tripInfo.routes[0].waypoint_order;
         // This is gross but is basically getting the correct location index for the dog that is being dropped off (we have to reverse the order hence the locations.length - 1 -)
-        var currBookingId = distances[orderArray[(distances.length - 1) - (tripWaypoint - 1)]].booking_id;
+        var currBookingId = distances[orderArray[distances.length - 1 - (tripWaypoint - 1)]].booking_id;
         $.ajax({
           url: '/bookings/' + currBookingId,
           method: 'PUT',
@@ -443,6 +445,6 @@
       directionsDisplay.setDirections(reverseTripInfo);
       printReverseDirectionInstructions();
     };
-   <% end %>
+  <% end %>
  }
 </script>
