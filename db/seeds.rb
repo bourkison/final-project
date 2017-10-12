@@ -8,7 +8,7 @@
 
 User.destroy_all
 
-u1 = User.create :name => 'Harrison Bourke', :email => 'harry@ga.co', :description => '19 year old who absolutely loves dogs!', :password => 'chicken', :password_confirmation => 'chicken', :address => '433 Alfred St N, Neutral Bay NSW 2089, Australia', :latitude => -33.8332364, :longtitude => 151.21261419999996
+u1 = User.create :name => 'Harrison Bourke', :email => 'harry@ga.co', :description => '19 year old who absolutely loves dogs!', :password => 'chicken', :password_confirmation => 'chicken', :address => '118 Military Rd, Neutral Bay NSW 2089, Australia', :latitude => -33.8300353, :longtitude => 151.21917989999997
 
 u2 = User.create :name => 'Matt Edge', :email => 'matt@ga.co', :description => 'Absolutely love my dog Whiskey, but down to make friends with some new dogs!', :password => 'chicken', :password_confirmation => 'chicken', :address => '12 Redfern St, Redfern NSW 2016, Australia', :latitude => -33.8930003, :longtitude => 151.207172
 
