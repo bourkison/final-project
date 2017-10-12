@@ -449,6 +449,8 @@
 
         $("#doneWalk").click(function() {
           $('.container').html("<h1>Ubog</h1><p>Welcome back, <%= @current_user.name %></p><div class='bookingCreate'><h3>Find a Dog Walker!</h3><input type='text' id='bookingAddress' placeholder='Address. Leave blank for home address.'/><button class='bookButton'>Book Dog Walk!</button></div><div id='bookingSuccess'></div><div class='tripCreate'><h3>Walk Some Dogs!</h3><input type='text' id='tripAddress' placeholder='Starting address. Leave blank for home address.'/><button class='tripButton'>Find Dogs To Walk!</button></div><div id='tripSuccess'></div>");
+
+          directionsDisplay.setMap(null);
         });
       }
 
