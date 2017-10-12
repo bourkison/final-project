@@ -190,6 +190,7 @@
     var directionsDisplay = new google.maps.DirectionsRenderer();
     // tripWaypoint is a number which keeps track of which step the dog walker is up to.
     var tripWaypoint = 0;
+    var waypoints = [];
 
     // CODE FOR ADDING A TRIP AND FINDING BOOKINGS.
     $('.tripButton').click(function (e) {
@@ -228,7 +229,7 @@
           for (var i = 0; i < bookings.length; i++) {
             // We need to check that the bookings aren't already completed, nor are they part of a trip. We do this by checking if there is an associaton before pushing into destinations.
             if (bookings[i].trip_id === null) {
-              destinations.push({ lat: bookings[i].latitude, lng: bookings[i].longtitude });
+              destinations.push({ lat: bookings[i].latitude, lng: bookings[i].longtitude, ad: bookings[i].address, id: bookings[i].id });
             }
           }
           // Make an array of objects which will have an address key and distance key to better associate the 2.
@@ -246,10 +247,19 @@
               distances.push({
                 address: response.destinationAddresses[i],
                 distance: response.rows[0].elements[i].distance.value,
-                booking_id: bookings[i].id
+                booking_id: destinations[i].id
               });
             }
-            // It would seem as though the API returns the distances sorted, but just to double check let's chuck a function in to do it.
+
+            setTimeout(500, function(){
+              console.log("Please work");
+            });
+
+            console.log("TEST", destinations);
+            console.log("Dist", distances);
+            console.log("DIst length", distances.length);
+            console.log(distances[3]);
+
             distances = distances.sort(function (a, b) {
               return a.distance - b.distance;
             });
@@ -286,7 +296,7 @@
         return;
       }
 
-      var waypoints = [];
+      waypoints = [];
       for (var i = 0; i < locations.length; i++) {
         locations[i].bookingId = distances[i].booking_id;
         waypoints.push({
@@ -299,7 +309,7 @@
           method: 'PUT',
           // data: { _method: 'PUT' },
           success: function success() {
-            console.log("Association added!");
+            // console.log("Association added!");
           },
           error: function error(e) {
             console.log(e);
@@ -378,10 +388,15 @@
       // Now we need to make an AJAX request to set the booking and shiz. In our trip info there's a way point order which will show us which element in locations array it is using. But only if we are on the next tripWaypoint.
       if (tripWaypoint > 0 && tripWaypoint < tripInfo.routes[0].legs.length) {
         var orderArray = tripInfo.routes[0].waypoint_order;
-        console.log(locations);
-        console.log(tripWaypoint - 1);
-        console.log(orderArray);
+        console.log("DEBUGGING:")
+        console.log("Wapoints", waypoints)
+        console.log("Locations", locations);
+        console.log("Trip waypoint", tripWaypoint - 1);
+        console.log("Order array", orderArray);
+        console.log("Thing im chucking into locations", orderArray[tripWaypoint - 1]);
+        console.log("Thing that's returning", locations[orderArray[tripWaypoint - 1]]);
         var currBookingId = locations[orderArray[tripWaypoint - 1]].bookingId;
+        // var currBookingId = locations[tripWaypoint - 1].bookingId;
         console.log("CURRENT BOOKING ID", currBookingId);
         $.ajax({
           url: '/bookings/' + currBookingId,
@@ -419,9 +434,9 @@
 
       // We are now going to set dropped_off.
       if (tripWaypoint > 0 && tripWaypoint < reverseTripInfo.routes[0].legs.length) {
-        var orderArray = reverseTripInfo.routes[0].waypoint_order;
+        var orderArray = tripInfo.routes[0].waypoint_order;
         // This is gross but is basically getting the correct location index for the dog that is being dropped off (we have to reverse the order hence the locations.length - 1 -)
-        var currBookingId = locations[orderArray[tripWaypoint - 1]].bookingId;
+        var currBookingId = locations[orderArray[(locations.length - 1) - (tripWaypoint - 1)]].bookingId;
         $.ajax({
           url: '/bookings/' + currBookingId,
           method: 'PUT',
