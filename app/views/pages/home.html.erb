@@ -284,7 +284,7 @@
       }
 
       var waypoints = [];
-      for (i = 0; i < locations.length; i++) {
+      for (var i = 0; i < locations.length; i++) {
         locations[i].bookingId = distances[i].booking_id;
         waypoints.push({
           location: locations[i],
