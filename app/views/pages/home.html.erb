@@ -45,8 +45,8 @@
     <% if @current_user.present? %>
     'use strict';
 
-    addr.lat = /*<%= @current_user.latitude %>*/0;
-    addr.lng = /*<%= @current_user.longtitude %>*/0;
+    addr.lat = <%= @current_user.latitude %>;
+    addr.lng = <%= @current_user.longtitude %>;
     map.setCenter(addr);
 
     var homeMarker = new google.maps.Marker({
