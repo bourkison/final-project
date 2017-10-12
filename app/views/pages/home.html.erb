@@ -24,6 +24,7 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBknCH8ac7AiYxL-9HQkKTT8KGKGydC7LU&libraries=places&callback=initMap" async defer></script>
 
 <script>
+'use strict';
   // CODE FOR MAP:
   var addr;
   var initMap = function() {
@@ -40,436 +41,417 @@
 
 
     <% if @current_user.present? %>
-      addr.lat = <%= @current_user.latitude %>;
-      addr.lng = <%= @current_user.longtitude %>;
-      map.setCenter(addr);
+    addr.lat = <%= @current_user.latitude %>;
+    addr.lng = <%= @current_user.longtitude %>;
+    map.setCenter(addr);
 
-      var homeMarker = new google.maps.Marker({
-        position: addr,
-        map: map,
-        title: 'Home'
-      });
+    var homeMarker = new google.maps.Marker({
+      position: addr,
+      map: map,
+      title: 'Home'
+    });
 
+    // CODE FOR AUTOCOMPLETE:
+    var addressObj = {
+      lat: 0,
+      lng: 0,
+      address: ''
+    };
 
+    // Autocomplete box
+    var defaultBounds = new google.maps.LatLngBounds(new google.maps.LatLng(-35, 150), new google.maps.LatLng(-33, 152));
 
-      // CODE FOR AUTOCOMPLETE:
-      var addressObj = {
-        lat: 0,
-        lng: 0,
-        address: ''
-      };
+    var $bookingInput = $("#bookingAddress");
+    var $tripInput = $("#tripAddress");
 
-      // Autocomplete box
-      var defaultBounds = new google.maps.LatLngBounds(
-        new google.maps.LatLng(-35, 150),
-        new google.maps.LatLng(-33, 152)
-      );
+    var options = {
+      bounds: defaultBounds,
+      types: ['address']
+    };
 
-      var $bookingInput = $("#bookingAddress");
-      var $tripInput = $("#tripAddress");
+    var bookingAutocomplete = new google.maps.places.Autocomplete($bookingInput[0], options);
+    var tripAutocomplete = new google.maps.places.Autocomplete($tripInput[0], options);
 
-      var options = {
-        bounds: defaultBounds,
-        types: ['address']
-      };
+    bookingAutocomplete.addListener('place_changed', function () {
+      googObj = bookingAutocomplete.getPlace();
+      addressObj.address = googObj.formatted_address;
+      addressObj.lat = googObj.geometry.location.lat();
+      addressObj.lng = googObj.geometry.location.lng();
+    });
 
-      var bookingAutocomplete = new google.maps.places.Autocomplete($bookingInput[0], options);
-      var tripAutocomplete = new google.maps.places.Autocomplete($tripInput[0], options);
+    tripAutocomplete.addListener('place_changed', function () {
+      googObj = tripAutocomplete.getPlace();
+      addressObj.address = googObj.formatted_address;
+      addressObj.lat = googObj.geometry.location.lat();
+      addressObj.lng = googObj.geometry.location.lng();
+      console.log(addressObj);
+    });
 
+    var newBooking;
 
+    // CODE FOR ADDING A BOOKING.
+    $('.bookButton').click(function (e) {
+      e.preventDefault();
 
-      bookingAutocomplete.addListener('place_changed', function() {
-        googObj = bookingAutocomplete.getPlace();
-        addressObj.address = googObj.formatted_address;
-        addressObj.lat = googObj.geometry.location.lat();
-        addressObj.lng = googObj.geometry.location.lng();
-      });
+      $('.tripCreate').css('display', 'none');
+      $('#tripSuccess').css('display', 'none');
 
-      tripAutocomplete.addListener('place_changed', function() {
-        googObj = tripAutocomplete.getPlace();
-        addressObj.address = googObj.formatted_address;
-        addressObj.lat = googObj.geometry.location.lat();
-        addressObj.lng = googObj.geometry.location.lng();
-        console.log(addressObj);
-      });
+      if (addressObj.address === '') {
+        addressObj.lat = <%= @current_user.latitude %>;
+        addressObj.lng = <%= @current_user.longtitude %>;
+        addressObj.address = "<%= @current_user.address %>";
+      } else {
+        homeMarker.setPosition({
+          lat: addressObj.lat,
+          lng: addressObj.lng
+        });
 
+        map.panTo({
+          lat: addressObj.lat,
+          lng: addressObj.lng
+        });
+      }
 
-      var newBooking;
-
-      // CODE FOR ADDING A BOOKING.
-      $('.bookButton').click(function(e) {
-        e.preventDefault();
-
-        $('.tripCreate').css('display', 'none');
-        $('#tripSuccess').css('display', 'none');
-
-        if (addressObj.address === '') {
-          addressObj.lat = <%= @current_user.latitude %>;
-          addressObj.lng = <%= @current_user.longtitude %>;
-          addressObj.address = "<%= @current_user.address %>";
-        } else {
-          homeMarker.setPosition({
-            lat: addressObj.lat,
-            lng: addressObj.lng
-          });
-
-          map.panTo({
-            lat: addressObj.lat,
-            lng: addressObj.lng
-          });
-        }
-
-
-        $.ajax({
-          url: '/bookings',
-          method: 'POST',
-          data: { booking: {
+      $.ajax({
+        url: '/bookings',
+        method: 'POST',
+        data: { booking: {
             address: addressObj.address,
             latitude: addressObj.lat,
             longtitude: addressObj.lng
-          }},
-          dataType: 'json',
-          success: function(response) {
-            $("#bookingSuccess").html("<p>Booking successfully made. Finding dog walker... <button id='cancelBooking'>Cancel</button></p>");
+          } },
+        dataType: 'json',
+        success: function success(response) {
+          $("#bookingSuccess").html("<p>Booking successfully made. Finding dog walker... <button id='cancelBooking'>Cancel</button></p>");
 
-            newBooking = response.booking;
+          newBooking = response.booking;
 
-            $("#cancelBooking").click(function(e) {
-              e.preventDefault();
-              $('.tripCreate').html('display', 'block');
-              $("#bookingSuccess").html("");
-              $.ajax({
-                url: '/bookings/' + newBooking.id,
-                method: 'DELETE',
-                success: function() {
-                  console.log("Booking #" + newBooking.id + " deleted!");
-                },
-                error: function(e) {
-                  console.log(e);
-                }
+          $("#cancelBooking").click(function (e) {
+            e.preventDefault();
+            $('.tripCreate').html('display', 'block');
+            $("#bookingSuccess").html("");
+            $.ajax({
+              url: '/bookings/' + newBooking.id,
+              method: 'DELETE',
+              success: function success() {
+                console.log("Booking #" + newBooking.id + " deleted!");
+              },
+              error: function error(e) {
+                console.log(e);
+              }
+            });
+          });
+
+          // We are now going to keep submitting post requests every 5 seconds to see if the booking has a trip id. If it does then that means it has been associated with a trip, and hence a walker is on their way.
+          fetchBooking();
+        },
+        error: function error(e) {
+          debugger;
+        }
+      });
+    });
+
+    var fetchBooking = function fetchBooking() {
+      $.ajax({
+        url: '/bookings/' + newBooking.id,
+        method: 'GET',
+        dataType: 'json',
+        success: function success(response) {
+          if (response.booking.dropped_off !== null) {
+            $("#bookingSuccess").html('<p>Dog safely droppped off! We hope you enjoyed using Ubog.');
+          } else if (response.booking.picked_up !== null) {
+            $("#bookingSuccess").html("<p>Dog walker, " + response.user.name + ", is currently walking your dog!</p>");
+            // Now we wan't to  keep submitting requests to see if the trip is done, however as this is less important we can do it less frequently.
+            setTimeout(fetchBooking, 20000);
+          } else {
+            if (response.booking.trip_id !== null) {
+              $("#bookingSuccess").html("<p>Dog walker, " + response.user.name + ", is currently on their way!<p>");
+            }
+            setTimeout(fetchBooking, 5000);
+          }
+        },
+        error: function error(e) {
+          console.log(e);
+        }
+      });
+    };
+
+    var distances = [];
+    var locations = [];
+    var bookings = [];
+    var origin;
+    var tripInfo;
+    var reverseTripInfo;
+    var directionsDisplay = new google.maps.DirectionsRenderer();
+    // tripWaypoint is a number which keeps track of which step the dog walker is up to.
+    var tripWaypoint = 0;
+
+    // CODE FOR ADDING A TRIP AND FINDING BOOKINGS.
+    $('.tripButton').click(function (e) {
+      e.preventDefault();
+
+      $('#tripSuccess').css('display', 'block');
+      $('.bookingCreate').css('display', 'none');
+      $('#tripSuccess').html('<p>Finding dogs to be picked up in your area.</p>');
+
+      if (addressObj.address === '') {
+        addressObj.lat = <%= @current_user.latitude %>;
+        addressObj.lng = <%= @current_user.longtitude %>;
+        addressObj.address = "<%= @current_user.address %>";
+      } else {
+        homeMarker.setPosition({
+          lat: addressObj.lat,
+          lng: addressObj.lng
+        });
+      }
+
+      $.ajax({
+        url: '/trips',
+        method: 'POST',
+        dataType: 'json',
+        data: { trip: {
+            address: addressObj.address,
+            latitude: addressObj.lat,
+            longtitude: addressObj.lng
+          } },
+        // The AJAX request will return a list of all the bookings
+        success: function success(response) {
+          bookings = response.bookings;
+          console.log(bookings);
+          origin = { lat: addressObj.lat, lng: addressObj.lng };
+          var destinations = [];
+          for (var i = 0; i < bookings.length; i++) {
+            // We need to check that the bookings aren't already completed, nor are they part of a trip. We do this by checking if there is an associaton before pushing into destinations.
+            if (bookings[i].trip_id === null) {
+              destinations.push({ lat: bookings[i].latitude, lng: bookings[i].longtitude });
+            }
+          }
+          // Make an array of objects which will have an address key and distance key to better associate the 2.
+          distances = [];
+
+          // Use Google Maps Distance Matrix API to get the distances between all the bookings and this trip.
+          var distanceService = new google.maps.DistanceMatrixService();
+
+          distanceService.getDistanceMatrix({
+            origins: [origin],
+            destinations: destinations,
+            travelMode: 'WALKING'
+          }, function (response, status) {
+            for (var i = 0; i < response.destinationAddresses.length; i++) {
+              distances.push({
+                address: response.destinationAddresses[i],
+                distance: response.rows[0].elements[i].distance.value,
+                booking_id: bookings[i].id
               });
+            }
+            // It would seem as though the API returns the distances sorted, but just to double check let's chuck a function in to do it.
+            distances = distances.sort(function (a, b) {
+              return a.distance - b.distance;
             });
 
-            // We are now going to keep submitting post requests every 5 seconds to see if the booking has a trip id. If it does then that means it has been associated with a trip, and hence a walker is on their way.
-            fetchBooking();
-          },
-          error: function( e ){
-            debugger
-          }
-        });
-      });
-
-      var fetchBooking = function() {
-        $.ajax({
-          url: '/bookings/' + newBooking.id,
-          method: 'GET',
-          dataType: 'json',
-          success: function(response) {
-            if (response.booking.dropped_off !== null) {
-              $("#bookingSuccess").html('<p>Dog safely droppped off! We hope you enjoyed using Ubog.')
-            } else if (response.booking.picked_up !== null) {
-              $("#bookingSuccess").html("<p>Dog walker, " + response.user.name + ", is currently walking your dog!</p>");
-              // Now we wan't to  keep submitting requests to see if the trip is done, however as this is less important we can do it less frequently.
-              setTimeout( fetchBooking, 20000 );
-            } else {
-              if (response.booking.trip_id !== null) {
-                $("#bookingSuccess").html("<p>Dog walker, " + response.user.name + ", is currently on their way!<p>");
-              }
-              setTimeout( fetchBooking, 5000 );
+            // Now let's drop the array to have only the closest 3 bookings.
+            while (distances.length > 3) {
+              distances.pop();
             }
+
+            locations = [];
+            geocodePromises = [];
+
+            var geocoder = new google.maps.Geocoder();
+            // Now let's geocode and add a marker at each of these locations!
+            for (var i = 0; i < distances.length; i++) {
+              geocoder.geocode({ 'address': distances[i].address }, function (geoResult, geoStatus) {
+                locations.push({
+                  lat: geoResult[0].geometry.location.lat(),
+                  lng: geoResult[0].geometry.location.lng()
+                });
+                continueTripSetup();
+              });
+            }
+          });
+        },
+        error: function error(e) {
+          debugger;
+        }
+      });
+    });
+
+    var continueTripSetup = function continueTripSetup() {
+      // As this function is being called several times, let's back out until all the Geocodes are done.
+      if (locations.length !== distances.length) {
+        return;
+      }
+
+      var waypoints = [];
+      for (i = 0; i < locations.length; i++) {
+        locations[i].bookingId = distances[i].booking_id;
+        waypoints.push({
+          location: locations[i],
+          stopover: true
+        });
+
+        $.ajax({
+          url: '/bookings/' + locations[i].bookingId,
+          method: 'PUT',
+          // data: { _method: 'PUT' },
+          success: function success() {
+            console.log("Association added!");
           },
-          error: function(e) {
+          error: function error(e) {
             console.log(e);
           }
         });
       }
 
+      // console.log("LOCATIONS", locations);
 
-      var distances = [];
-      var locations = [];
-      var bookings = [];
-      var origin;
-      var tripInfo;
-      var reverseTripInfo;
-      var directionsDisplay = new google.maps.DirectionsRenderer;
-      // tripWaypoint is a number which keeps track of which step the dog walker is up to.
-      var tripWaypoint = 0;
+      var directionsService = new google.maps.DirectionsService();
 
+      directionsDisplay.setMap(map);
 
-      // CODE FOR ADDING A TRIP AND FINDING BOOKINGS.
-      $('.tripButton').click(function(e) {
-        e.preventDefault();
+      // We want to find the closest park and add that as our destination.
+      var placesService = new google.maps.places.PlacesService(map);
 
-        $('#tripSuccess').css('display', 'block');
-        $('.bookingCreate').css('display', 'none');
-        $('#tripSuccess').html('<p>Finding dogs to be picked up in your area.</p>');
+      placesService.nearbySearch({
+        location: locations[locations.length - 1],
+        radius: 1000,
+        type: ['park']
+      }, function (parkResults, parkStatus) {
+        var destination = {
+          lat: parkResults[0].geometry.location.lat(),
+          lng: parkResults[0].geometry.location.lng()
+        };
 
-        if (addressObj.address === '') {
-          addressObj.lat = <%= @current_user.latitude %>;
-          addressObj.lng = <%= @current_user.longtitude %>;
-          addressObj.address = "<%= @current_user.address %>";
-        } else {
-          homeMarker.setPosition({
-            lat: addressObj.lat,
-            lng: addressObj.lng
-          });
-        }
-
-        $.ajax({
-          url: '/trips',
-          method: 'POST',
-          dataType: 'json',
-          data: { trip: {
-            address: addressObj.address,
-            latitude: addressObj.lat,
-            longtitude: addressObj.lng
-          }},
-          // The AJAX request will return a list of all the bookings
-          success: function(response) {
-            bookings = response.bookings;
-            console.log(bookings);
-            origin = { lat: addressObj.lat, lng: addressObj.lng };
-            var destinations = [];
-            for (var i = 0; i < bookings.length; i++) {
-              // We need to check that the bookings aren't already completed, nor are they part of a trip. We do this by checking if there is an associaton before pushing into destinations.
-              if (bookings[i].trip_id === null) {
-                destinations.push({ lat: bookings[i].latitude, lng: bookings[i].longtitude});
-              }
-            }
-            // Make an array of objects which will have an address key and distance key to better associate the 2.
-            distances = [];
-
-
-            // Use Google Maps Distance Matrix API to get the distances between all the bookings and this trip.
-            var distanceService = new google.maps.DistanceMatrixService;
-
-            distanceService.getDistanceMatrix({
-              origins: [origin],
-              destinations: destinations,
-              travelMode: 'WALKING'
-            }, function(response, status) {
-              for (var i = 0; i < response.destinationAddresses.length; i++) {
-                distances.push({
-                  address: response.destinationAddresses[i],
-                  distance: response.rows[0].elements[i].distance.value,
-                  booking_id: bookings[i].id
-                });
-              }
-              // It would seem as though the API returns the distances sorted, but just to double check let's chuck a function in to do it.
-              distances = distances.sort(function(a, b) {
-                return a.distance - b.distance;
-              });
-
-              // Now let's drop the array to have only the closest 3 bookings.
-              while (distances.length > 3) {
-                distances.pop();
-              }
-
-              locations = [];
-              geocodePromises = [];
-
-              var geocoder = new google.maps.Geocoder();
-              // Now let's geocode and add a marker at each of these locations!
-              for (var i = 0; i < distances.length; i++) {
-                geocoder.geocode({ 'address': distances[i].address }, function(geoResult, geoStatus) {
-                  locations.push ({
-                    lat: geoResult[0].geometry.location.lat(),
-                    lng: geoResult[0].geometry.location.lng(),
-                  });
-                  continueTripSetup();
-                });
-              }
-            });
-          },
-          error: function(e) {
-            debugger
-          }
+        directionsService.route({
+          origin: origin,
+          destination: destination,
+          waypoints: waypoints,
+          travelMode: 'WALKING',
+          optimizeWaypoints: true
+        }, function (response, status) {
+          tripInfo = response;
+          // console.log("DIRECTION SERVICE RESPONSE", tripInfo);
+          // Now let's get rid of the home marker.
+          homeMarker.setMap(null);
+          directionsDisplay.setDirections(tripInfo);
+          var route = tripInfo.routes[0];
+          printDirectionInstructions();
+        });
+        // Now we want to save the directions for heading home as well.
+        directionsService.route({
+          origin: destination,
+          destination: origin,
+          waypoints: waypoints,
+          travelMode: 'WALKING',
+          optimizeWaypoints: true
+        }, function (response, status) {
+          reverseTripInfo = response;
         });
       });
+    };
 
-      var continueTripSetup = function() {
-        // As this function is being called several times, let's back out until all the Geocodes are done.
-        if (locations.length !== distances.length) {
-          return;
-        }
+    var printDirectionInstructions = function printDirectionInstructions() {
+      console.log(tripInfo);
+      $('.tripCreate').html('');
+      var infoString = "<ul>";
+      var temp = tripInfo.routes[0].legs[tripWaypoint];
+      for (i = 0; i < temp.steps.length; i++) {
+        infoString += "<li>" + temp.steps[i].instructions + "</li>";
+      }
+      infoString += "</ul>";
 
-        var waypoints = [];
-        for (i = 0; i < locations.length; i++) {
-          locations[i].bookingId = distances[i].booking_id
-          waypoints.push({
-            location: locations[i],
-            stopover: true
-          });
+      if (tripWaypoint !== tripInfo.routes[0].legs.length - 1) {
+        infoString += "<button id='nextStop'>Next Step</button>";
+      } else {
+        infoString += "<button id='doneWalkToPark'>Head Back</button>";
+      }
+      // Let's give the user the information, then add a button to get them to the next step.
+      $("#tripSuccess").html(infoString);
 
-          $.ajax({
-            url: '/bookings/' + locations[i].bookingId,
-            method: 'PUT',
-            // data: { _method: 'PUT' },
-            success: function() {
-              console.log("Association added!");
-            },
-            error: function(e) {
-              console.log(e);
-            }
-          });
-        }
+      $("#nextStop").click(nextStopFunc);
+      $("#doneWalkToPark").click(reverseRoute);
 
-        // console.log("LOCATIONS", locations);
-
-        var directionsService = new google.maps.DirectionsService;
-
-        directionsDisplay.setMap(map);
-
-        // We want to find the closest park and add that as our destination.
-        var placesService = new google.maps.places.PlacesService(map);
-
-        placesService.nearbySearch({
-          location: locations[locations.length - 1],
-          radius: 1000,
-          type: ['park']
-        }, function(parkResults, parkStatus) {
-          var destination = {
-            lat: parkResults[0].geometry.location.lat(),
-            lng: parkResults[0].geometry.location.lng()
+      // Now we need to make an AJAX request to set the booking and shiz. In our trip info there's a way point order which will show us which element in locations array it is using. But only if we are on the next tripWaypoint.
+      if (tripWaypoint > 0 && tripWaypoint < tripInfo.routes[0].legs.length) {
+        var orderArray = tripInfo.routes[0].waypoint_order;
+        console.log(locations);
+        console.log(tripWaypoint - 1);
+        console.log(orderArray);
+        var currBookingId = locations[orderArray[tripWaypoint - 1]].bookingId;
+        console.log("CURRENT BOOKING ID", currBookingId);
+        $.ajax({
+          url: '/bookings/' + currBookingId,
+          method: 'PUT',
+          // data: { _method: 'PUT' },
+          success: function success() {
+            console.log("Dog picked up!", currBookingId);
+          },
+          error: function error(e) {
+            console.log(e);
           }
-
-          directionsService.route({
-            origin: origin,
-            destination: destination,
-            waypoints: waypoints,
-            travelMode: 'WALKING',
-            optimizeWaypoints: true
-          }, function(response, status) {
-            tripInfo = response;
-            // console.log("DIRECTION SERVICE RESPONSE", tripInfo);
-            // Now let's get rid of the home marker.
-            homeMarker.setMap(null);
-            directionsDisplay.setDirections(tripInfo);
-            var route = tripInfo.routes[0];
-            printDirectionInstructions();
-          });
-          // Now we want to save the directions for heading home as well.
-          directionsService.route({
-            origin: destination,
-            destination: origin,
-            waypoints: waypoints,
-            travelMode: 'WALKING',
-            optimizeWaypoints: true
-          }, function(response, status) {
-            reverseTripInfo = response;
-          });
         });
       }
+    };
 
-      var printDirectionInstructions = function() {
-        console.log(tripInfo);
-        $('.tripCreate').html('');
-        var infoString = "<ul>";
-        var temp = tripInfo.routes[0].legs[tripWaypoint];
-        for (i = 0; i < temp.steps.length; i ++) {
-          infoString += "<li>" + temp.steps[i].instructions + "</li>"
-        }
-        infoString += "</ul>"
+    var nextStopFunc = function nextStopFunc(e) {
+      e.preventDefault();
+      tripWaypoint++;
+      printDirectionInstructions();
+    };
 
-        if (tripWaypoint !== tripInfo.routes[0].legs.length - 1) {
-          infoString += "<button id='nextStop'>Next Step</button>"
-        } else {
-          infoString += "<button id='doneWalkToPark'>Head Back</button>"
-        }
-        // Let's give the user the information, then add a button to get them to the next step.
-        $("#tripSuccess").html(infoString);
+    var printReverseDirectionInstructions = function printReverseDirectionInstructions() {
+      var infoString = "<ul>";
+      var temp = reverseTripInfo.routes[0].legs[tripWaypoint];
+      for (i = 0; i < temp.steps.length; i++) {
+        infoString += "<li>" + temp.steps[i].instructions + "</li>";
+      }
+      infoString += "</ul>";
 
-        $("#nextStop").click(nextStopFunc);
-        $("#doneWalkToPark").click(reverseRoute);
-
-
-        // Now we need to make an AJAX request to set the booking and shiz. In our trip info there's a way point order which will show us which element in locations array it is using. But only if we are on the next tripWaypoint.
-        if (tripWaypoint > 0 && tripWaypoint < tripInfo.routes[0].legs.length) {
-          var orderArray = tripInfo.routes[0].waypoint_order
-          console.log(locations);
-          console.log(tripWaypoint - 1);
-          console.log(orderArray);
-          var currBookingId = locations[orderArray[tripWaypoint - 1]].bookingId;
-          console.log("CURRENT BOOKING ID", currBookingId)
-          $.ajax({
-            url: '/bookings/' + currBookingId,
-            method: 'PUT',
-            // data: { _method: 'PUT' },
-            success: function() {
-              console.log("Dog picked up!", currBookingId);
-            },
-            error: function(e) {
-              console.log(e);
-            }
-          });
-        }
+      if (tripWaypoint !== reverseTripInfo.routes[0].legs.length - 1) {
+        infoString += "<button id='nextReverseStop'>Next Step</button>";
+      } else {
+        infoString += "<button id='doneWalk'>Done!</button>";
       }
 
-      var nextStopFunc = function(e) {
-        e.preventDefault();
-        tripWaypoint++;
-        printDirectionInstructions();
-      };
-
-
-
-      var printReverseDirectionInstructions = function() {
-        var infoString = "<ul>";
-        var temp = reverseTripInfo.routes[0].legs[tripWaypoint];
-        for (i = 0; i < temp.steps.length; i ++) {
-          infoString += "<li>" + temp.steps[i].instructions + "</li>"
-        }
-        infoString += "</ul>"
-
-        if (tripWaypoint !== reverseTripInfo.routes[0].legs.length - 1) {
-          infoString += "<button id='nextReverseStop'>Next Step</button>"
-        } else {
-          infoString += "<button id='doneWalk'>Done!</button>"
-        }
-
-        // We are now going to set dropped_off.
-        if (tripWaypoint > 0 && tripWaypoint < reverseTripInfo.routes[0].legs.length) {
-          var orderArray = reverseTripInfo.routes[0].waypoint_order
-          // This is gross but is basically getting the correct location index for the dog that is being dropped off (we have to reverse the order hence the locations.length - 1 -)
-          var currBookingId = locations[orderArray[tripWaypoint - 1]].bookingId;
-          $.ajax({
-            url: '/bookings/' + currBookingId,
-            method: 'PUT',
-            // data: { _method: 'PUT' },
-            success: function() {
-              console.log("Dog dropped off!", currBookingId);
-            },
-            error: function(e) {
-              console.log(e);
-            }
-          });
-        }
-        $("#tripSuccess").html(infoString);
-        $("#nextReverseStop").click(nextReverseStopFunc);
-
-        $("#doneWalk").click(function() {
-          $('.container').html("<h1>Ubog</h1><p>Welcome back, <%= @current_user.name %></p><div class='bookingCreate'><h3>Find a Dog Walker!</h3><input type='text' id='bookingAddress' placeholder='Address. Leave blank for home address.'/><button class='bookButton'>Book Dog Walk!</button></div><div id='bookingSuccess'></div><div class='tripCreate'><h3>Walk Some Dogs!</h3><input type='text' id='tripAddress' placeholder='Starting address. Leave blank for home address.'/><button class='tripButton'>Find Dogs To Walk!</button></div><div id='tripSuccess'></div>");
-
-          directionsDisplay.setMap(null);
+      // We are now going to set dropped_off.
+      if (tripWaypoint > 0 && tripWaypoint < reverseTripInfo.routes[0].legs.length) {
+        var orderArray = reverseTripInfo.routes[0].waypoint_order;
+        // This is gross but is basically getting the correct location index for the dog that is being dropped off (we have to reverse the order hence the locations.length - 1 -)
+        var currBookingId = locations[orderArray[tripWaypoint - 1]].bookingId;
+        $.ajax({
+          url: '/bookings/' + currBookingId,
+          method: 'PUT',
+          // data: { _method: 'PUT' },
+          success: function success() {
+            console.log("Dog dropped off!", currBookingId);
+          },
+          error: function error(e) {
+            console.log(e);
+          }
         });
       }
+      $("#tripSuccess").html(infoString);
+      $("#nextReverseStop").click(nextReverseStopFunc);
 
+      $("#doneWalk").click(function () {
+        $('.container').html("<h1>Ubog</h1><p>Welcome back, <%= @current_user.name %></p><div class='bookingCreate'><h3>Find a Dog Walker!</h3><input type='text' id='bookingAddress' placeholder='Address. Leave blank for home address.'/><button class='bookButton'>Book Dog Walk!</button></div><div id='bookingSuccess'></div><div class='tripCreate'><h3>Walk Some Dogs!</h3><input type='text' id='tripAddress' placeholder='Starting address. Leave blank for home address.'/><button class='tripButton'>Find Dogs To Walk!</button></div><div id='tripSuccess'></div>");
 
-      var nextReverseStopFunc = function(e) {
-        e.preventDefault();
-        tripWaypoint++;
-        printReverseDirectionInstructions();
-      }
+        directionsDisplay.setMap(null);
+      });
+    };
 
-      var reverseRoute = function(e) {
-        e.preventDefault();
-        tripWaypoint = 0;
-        directionsDisplay.setDirections(reverseTripInfo);
-        printReverseDirectionInstructions();
-      }
+    var nextReverseStopFunc = function nextReverseStopFunc(e) {
+      e.preventDefault();
+      tripWaypoint++;
+      printReverseDirectionInstructions();
+    };
+
+    var reverseRoute = function reverseRoute(e) {
+      e.preventDefault();
+      tripWaypoint = 0;
+      directionsDisplay.setDirections(reverseTripInfo);
+      printReverseDirectionInstructions();
+    };
    <% end %>
-  }
-
-
-
+ }
 </script>
