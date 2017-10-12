@@ -31110,3 +31110,474 @@ Completed 200 OK in 174ms (Views: 171.3ms | ActiveRecord: 0.2ms)
   [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
   [1m[35mSQL (0.2ms)[0m  [1m[33mUPDATE "bookings" SET "user_id" = $1, "updated_at" = $2 WHERE "bookings"."id" = $3[0m  [["user_id", 119], ["updated_at", "2017-10-11 09:33:22.465485"], ["id", 192]]
   [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/" for 10.0.2.2 at 2017-10-11 05:33:24 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by PagesController#home as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 112], ["LIMIT", 1]]
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 191ms (Views: 188.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 10.0.2.2 at 2017-10-11 05:33:24 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by PagesController#home as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 111], ["LIMIT", 1]]
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 222ms (Views: 219.8ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/login" for 10.0.2.2 at 2017-10-11 05:33:26 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SessionController#new as HTML
+  Rendering session/new.html.erb within layouts/application
+  Rendered session/new.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 237ms (Views: 236.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for 10.0.2.2 at 2017-10-11 05:33:30 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SessionController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"EsRbkfAurpVqAGYz8nSWBI78lb37DJaXD7KYScH+qlsFaeSXkiYaR5MhKgUY61vRJsHLuxMY7i2wWxhDT+gB4Q==", "email"=>"harry@ga.co", "password"=>"[FILTERED]", "commit"=>"Login"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "harry@ga.co"], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Completed 302 Found in 86ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 10.0.2.2 at 2017-10-11 05:33:30 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by PagesController#home as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 116], ["LIMIT", 1]]
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 239ms (Views: 237.1ms | ActiveRecord: 0.1ms)
+
+
+Started POST "/trips" for 10.0.2.2 at 2017-10-11 05:33:34 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by TripsController#create as JSON
+  Parameters: {"trip"=>{"address"=>"433 Alfred St N, Neutral Bay NSW 2089, Australia", "latitude"=>"-33.8332364", "longtitude"=>"151.2126142"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 116], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "trips" ("user_id", "created_at", "updated_at", "address", "latitude", "longtitude") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["user_id", 116], ["created_at", "2017-10-11 09:33:34.242809"], ["updated_at", "2017-10-11 09:33:34.242809"], ["address", "433 Alfred St N, Neutral Bay NSW 2089, Australia"], ["latitude", -33.8332364], ["longtitude", 151.2126142]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mBooking Load (0.2ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings"[0m
+Completed 200 OK in 8ms (Views: 2.5ms | ActiveRecord: 2.0ms)
+
+
+Started PUT "/bookings/192" for 10.0.2.2 at 2017-10-11 05:33:34 -0400
+Started PUT "/bookings/189" for 10.0.2.2 at 2017-10-11 05:33:34 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by BookingsController#update as */*
+Processing by BookingsController#update as */*
+  Parameters: {"id"=>"189"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 116], ["LIMIT", 1]]
+  [1m[36mBooking Load (0.6ms)[0m  [1m[34mSELECT  "bookings".* FROM "bookings" WHERE "bookings"."id" = $1 LIMIT $2[0m  [["id", 189], ["LIMIT", 1]]
+  Parameters: {"id"=>"192"}
+  [1m[36mTrip Load (0.5ms)[0m  [1m[34mSELECT  "trips".* FROM "trips" WHERE "trips"."user_id" = $1 ORDER BY "trips"."id" DESC LIMIT $2[0m  [["user_id", 116], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 116], ["LIMIT", 1]]
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mBooking Load (0.6ms)[0m  [1m[34mSELECT  "bookings".* FROM "bookings" WHERE "bookings"."id" = $1 LIMIT $2[0m  [["id", 192], ["LIMIT", 1]]
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "bookings" SET "trip_id" = $1, "updated_at" = $2 WHERE "bookings"."id" = $3[0m  [["trip_id", 180], ["updated_at", "2017-10-11 09:33:34.417380"], ["id", 189]]
+  [1m[36mTrip Load (0.3ms)[0m  [1m[34mSELECT  "trips".* FROM "trips" WHERE "trips"."user_id" = $1 ORDER BY "trips"."id" DESC LIMIT $2[0m  [["user_id", 116], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[33mUPDATE "bookings" SET "trip_id" = $1, "updated_at" = $2 WHERE "bookings"."id" = $3[0m  [["trip_id", 180], ["updated_at", "2017-10-11 09:33:34.427582"], ["id", 192]]
+  [1m[35m (2.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (488.2ms)[0m  [1m[35mCOMMIT[0m
+Started PUT "/bookings/191" for 10.0.2.2 at 2017-10-11 05:33:34 -0400
+No template found for BookingsController#update, rendering head :no_content
+Completed 204 No Content in 1648ms (ActiveRecord: 4.7ms)
+
+
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+No template found for BookingsController#update, rendering head :no_content
+Processing by BookingsController#update as */*
+Completed 204 No Content in 2082ms (ActiveRecord: 489.5ms)
+
+
+  Parameters: {"id"=>"191"}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 116], ["LIMIT", 1]]
+  [1m[36mBooking Load (0.4ms)[0m  [1m[34mSELECT  "bookings".* FROM "bookings" WHERE "bookings"."id" = $1 LIMIT $2[0m  [["id", 191], ["LIMIT", 1]]
+  [1m[36mTrip Load (0.3ms)[0m  [1m[34mSELECT  "trips".* FROM "trips" WHERE "trips"."user_id" = $1 ORDER BY "trips"."id" DESC LIMIT $2[0m  [["user_id", 116], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[33mUPDATE "bookings" SET "trip_id" = $1, "updated_at" = $2 WHERE "bookings"."id" = $3[0m  [["trip_id", 180], ["updated_at", "2017-10-11 09:33:36.502986"], ["id", 191]]
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+No template found for BookingsController#update, rendering head :no_content
+Completed 204 No Content in 799ms (ActiveRecord: 2.3ms)
+
+
+Started PUT "/bookings/192" for 10.0.2.2 at 2017-10-11 05:33:41 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by BookingsController#update as */*
+  Parameters: {"id"=>"192"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 116], ["LIMIT", 1]]
+  [1m[36mBooking Load (0.1ms)[0m  [1m[34mSELECT  "bookings".* FROM "bookings" WHERE "bookings"."id" = $1 LIMIT $2[0m  [["id", 192], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[33mUPDATE "bookings" SET "picked_up" = $1, "updated_at" = $2 WHERE "bookings"."id" = $3[0m  [["picked_up", "2017-10-11 09:33:41.088424"], ["updated_at", "2017-10-11 09:33:41.088982"], ["id", 192]]
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+No template found for BookingsController#update, rendering head :no_content
+Completed 204 No Content in 651ms (ActiveRecord: 1.6ms)
+
+
+Started PUT "/bookings/191" for 10.0.2.2 at 2017-10-11 05:33:44 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by BookingsController#update as */*
+  Parameters: {"id"=>"191"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 116], ["LIMIT", 1]]
+  [1m[36mBooking Load (0.1ms)[0m  [1m[34mSELECT  "bookings".* FROM "bookings" WHERE "bookings"."id" = $1 LIMIT $2[0m  [["id", 191], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[33mUPDATE "bookings" SET "picked_up" = $1, "updated_at" = $2 WHERE "bookings"."id" = $3[0m  [["picked_up", "2017-10-11 09:33:44.200505"], ["updated_at", "2017-10-11 09:33:44.200991"], ["id", 191]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+No template found for BookingsController#update, rendering head :no_content
+Completed 204 No Content in 640ms (ActiveRecord: 1.7ms)
+
+
+Started PUT "/bookings/189" for 10.0.2.2 at 2017-10-11 05:33:45 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by BookingsController#update as */*
+  Parameters: {"id"=>"189"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 116], ["LIMIT", 1]]
+  [1m[36mBooking Load (0.1ms)[0m  [1m[34mSELECT  "bookings".* FROM "bookings" WHERE "bookings"."id" = $1 LIMIT $2[0m  [["id", 189], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[33mUPDATE "bookings" SET "picked_up" = $1, "updated_at" = $2 WHERE "bookings"."id" = $3[0m  [["picked_up", "2017-10-11 09:33:45.949906"], ["updated_at", "2017-10-11 09:33:45.950505"], ["id", 189]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+No template found for BookingsController#update, rendering head :no_content
+Completed 204 No Content in 672ms (ActiveRecord: 1.6ms)
+
+
+Started PUT "/bookings/189" for 10.0.2.2 at 2017-10-11 05:33:51 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by BookingsController#update as */*
+  Parameters: {"id"=>"189"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 116], ["LIMIT", 1]]
+  [1m[36mBooking Load (0.1ms)[0m  [1m[34mSELECT  "bookings".* FROM "bookings" WHERE "bookings"."id" = $1 LIMIT $2[0m  [["id", 189], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[33mUPDATE "bookings" SET "dropped_off" = $1, "updated_at" = $2 WHERE "bookings"."id" = $3[0m  [["dropped_off", "2017-10-11 09:33:51.201059"], ["updated_at", "2017-10-11 09:33:51.201580"], ["id", 189]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+No template found for BookingsController#update, rendering head :no_content
+Completed 204 No Content in 646ms (ActiveRecord: 1.5ms)
+
+
+Started PUT "/bookings/191" for 10.0.2.2 at 2017-10-11 05:33:52 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by BookingsController#update as */*
+  Parameters: {"id"=>"191"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 116], ["LIMIT", 1]]
+  [1m[36mBooking Load (0.2ms)[0m  [1m[34mSELECT  "bookings".* FROM "bookings" WHERE "bookings"."id" = $1 LIMIT $2[0m  [["id", 191], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "bookings" SET "dropped_off" = $1, "updated_at" = $2 WHERE "bookings"."id" = $3[0m  [["dropped_off", "2017-10-11 09:33:53.032636"], ["updated_at", "2017-10-11 09:33:53.033347"], ["id", 191]]
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+No template found for BookingsController#update, rendering head :no_content
+Completed 204 No Content in 666ms (ActiveRecord: 2.1ms)
+
+
+Started PUT "/bookings/192" for 10.0.2.2 at 2017-10-11 05:33:54 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by BookingsController#update as */*
+  Parameters: {"id"=>"192"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 116], ["LIMIT", 1]]
+  [1m[36mBooking Load (0.1ms)[0m  [1m[34mSELECT  "bookings".* FROM "bookings" WHERE "bookings"."id" = $1 LIMIT $2[0m  [["id", 192], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[33mUPDATE "bookings" SET "dropped_off" = $1, "updated_at" = $2 WHERE "bookings"."id" = $3[0m  [["dropped_off", "2017-10-11 09:33:54.511504"], ["updated_at", "2017-10-11 09:33:54.512141"], ["id", 192]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+No template found for BookingsController#update, rendering head :no_content
+Completed 204 No Content in 638ms (ActiveRecord: 1.9ms)
+
+
+Started GET "/" for 10.0.2.2 at 2017-10-11 05:34:12 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by PagesController#home as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 116], ["LIMIT", 1]]
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 159ms (Views: 157.6ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/" for 10.0.2.2 at 2017-10-11 05:36:02 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by PagesController#home as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 116], ["LIMIT", 1]]
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 373ms (Views: 371.8ms | ActiveRecord: 0.2ms)
+
+
+  [1m[36mBooking Load (0.4ms)[0m  [1m[34mSELECT  "bookings".* FROM "bookings" ORDER BY "bookings"."id" DESC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 116]]
+  [1m[35m (2.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 117]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 118]]
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 119]]
+  [1m[35m (1.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.4ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "harry@ga.co"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "latitude", "longtitude", "description", "email", "created_at", "updated_at", "password_digest") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Harrison Bourke"], ["address", "433 Alfred St N, Neutral Bay NSW 2089, Australia"], ["latitude", -33.8332364], ["longtitude", 151.21261419999996], ["description", "19 year old who absolutely loves dogs!"], ["email", "harry@ga.co"], ["created_at", "2017-10-11 09:43:09.650668"], ["updated_at", "2017-10-11 09:43:09.650668"], ["password_digest", "$2a$10$P7o30fZMQkeZPfY9vlXPvOzO6Lw5Qvf.Var0cAo0DxtfaXSS9kd6i"]]
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "matt@ga.co"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "latitude", "longtitude", "description", "email", "created_at", "updated_at", "password_digest") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Matt Edge"], ["address", "12 Redfern St, Redfern NSW 2016, Australia"], ["latitude", -33.8930003], ["longtitude", 151.207172], ["description", "Absolutely love my dog Whiskey, but down to make friends with some new dogs!"], ["email", "matt@ga.co"], ["created_at", "2017-10-11 09:43:09.721979"], ["updated_at", "2017-10-11 09:43:09.721979"], ["password_digest", "$2a$10$uTbr2PhnS7bYyUwbbwdOH.VwuzCnbwuBL5BVOqA9iwcBLuPjM236m"]]
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "richie@ga.co"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "latitude", "longtitude", "description", "email", "created_at", "updated_at", "password_digest") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Richie Stanton"], ["address", "51 Spofforth St, Mosman NSW 2088, Australia"], ["latitude", -33.8325518], ["longtitude", 151.22944889999997], ["description", "Love looking after dogs - often get paid to do so!"], ["email", "richie@ga.co"], ["created_at", "2017-10-11 09:43:09.795981"], ["updated_at", "2017-10-11 09:43:09.795981"], ["password_digest", "$2a$10$6GdK.M/mWRNpfz.7Yv/T7.qjbEuelOfMTFtfkgbI3k6BTznAxqh5O"]]
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "kane@ga.co"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "latitude", "longtitude", "description", "email", "created_at", "updated_at", "password_digest") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Kane Mott"], ["address", "12 Penrith Ave, Wheeler Heights NSW 2097, Australia"], ["latitude", -33.732427], ["longtitude", 151.2794176], ["description", "Don't have any dogs of my own, hence keen to make some friends with other people's!"], ["email", "kane@ga.co"], ["created_at", "2017-10-11 09:43:09.866037"], ["updated_at", "2017-10-11 09:43:09.866037"], ["password_digest", "$2a$10$LCkCFlpXWnpvetR5SSVmNeGOQ14OiU9py0fMhSyZ4lcnNJvsbp82W"]]
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mBooking Load (0.4ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "bookings" WHERE "bookings"."id" = $1[0m  [["id", 189]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "bookings" WHERE "bookings"."id" = $1[0m  [["id", 191]]
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "bookings" WHERE "bookings"."id" = $1[0m  [["id", 192]]
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "bookings" WHERE "bookings"."id" = $1[0m  [["id", 190]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "bookings" ("latitude", "longtitude", "created_at", "updated_at", "address") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["latitude", -33.8319004], ["longtitude", 151.2169825], ["created_at", "2017-10-11 09:43:09.907246"], ["updated_at", "2017-10-11 09:43:09.907246"], ["address", "15 Yeo St, Neutral Bay NSW 2089, Australia"]]
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "bookings" ("latitude", "longtitude", "created_at", "updated_at", "address") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["latitude", -33.732427], ["longtitude", 151.2794176], ["created_at", "2017-10-11 09:43:09.909838"], ["updated_at", "2017-10-11 09:43:09.909838"], ["address", "12 Penrith Ave, Wheeler Heights NSW 2097, Australia"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "bookings" ("latitude", "longtitude", "created_at", "updated_at", "address") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["latitude", -33.8332423], ["longtitude", 151.217527], ["created_at", "2017-10-11 09:43:09.912402"], ["updated_at", "2017-10-11 09:43:09.912402"], ["address", "2 Lindsay St, Neutral Bay NSW 2089, Australia"]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "bookings" ("latitude", "longtitude", "created_at", "updated_at", "address") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["latitude", -33.8325663], ["longtitude", 151.2136604], ["created_at", "2017-10-11 09:43:09.915139"], ["updated_at", "2017-10-11 09:43:09.915139"], ["address", "1 Rose Ave, North Sydney NSW 2060, Australia"]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTrip Load (0.4ms)[0m  [1m[34mSELECT "trips".* FROM "trips"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM "trips" WHERE "trips"."id" = $1[0m  [["id", 180]]
+  [1m[35m (1.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[33mUPDATE "bookings" SET "user_id" = $1, "updated_at" = $2 WHERE "bookings"."id" = $3[0m  [["user_id", 120], ["updated_at", "2017-10-11 09:43:09.999935"], ["id", 193]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[33mUPDATE "bookings" SET "user_id" = $1, "updated_at" = $2 WHERE "bookings"."id" = $3[0m  [["user_id", 121], ["updated_at", "2017-10-11 09:43:10.003137"], ["id", 194]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[33mUPDATE "bookings" SET "user_id" = $1, "updated_at" = $2 WHERE "bookings"."id" = $3[0m  [["user_id", 122], ["updated_at", "2017-10-11 09:43:10.005636"], ["id", 195]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[33mUPDATE "bookings" SET "user_id" = $1, "updated_at" = $2 WHERE "bookings"."id" = $3[0m  [["user_id", 123], ["updated_at", "2017-10-11 09:43:10.007833"], ["id", 196]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+Started DELETE "/login" for 10.0.2.2 at 2017-10-11 05:43:18 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SessionController#destroy as HTML
+  Parameters: {"authenticity_token"=>"B7JH771QWJmCFUB1CWRpScgqEvT18VuxPCouM5ujXQ8QH/jp31jsS3s0DEPj+6ScYBdM8h3lIwuDw645FbX2tQ=="}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 116], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Completed 302 Found in 2ms (ActiveRecord: 0.1ms)
+
+
+Started GET "/" for 10.0.2.2 at 2017-10-11 05:43:18 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by PagesController#home as HTML
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 202ms (Views: 201.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/login" for 10.0.2.2 at 2017-10-11 05:43:21 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SessionController#new as HTML
+  Rendering session/new.html.erb within layouts/application
+  Rendered session/new.html.erb within layouts/application (2.7ms)
+Completed 200 OK in 262ms (Views: 261.3ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for 10.0.2.2 at 2017-10-11 05:43:25 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SessionController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"118Gfc8VY/EyaqP5jv9BT5W4Q5xiL3uXUgHVSmunCAfA8rl7rR3XI8tL789kYIyaPYUdmoo7Ay3t6FVA5bGjvQ==", "email"=>"harry@ga.co", "password"=>"[FILTERED]", "commit"=>"Login"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "harry@ga.co"], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Completed 302 Found in 73ms (ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 10.0.2.2 at 2017-10-11 05:43:25 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by PagesController#home as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 120], ["LIMIT", 1]]
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 203ms (Views: 197.7ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/login" for 10.0.2.2 at 2017-10-11 05:43:31 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SessionController#new as HTML
+  Rendering session/new.html.erb within layouts/application
+  Rendered session/new.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 193ms (Views: 192.5ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for 10.0.2.2 at 2017-10-11 05:43:35 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SessionController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"9ZrwiwY271mwIjZQGOYXupt6deY1nmS7z1ZR1or0aDPkqMvjILzetkWc34rYLqsby283uVF6dxzRlYsLFAgSXg==", "email"=>"kane@ga.co", "password"=>"[FILTERED]", "commit"=>"Login"}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "kane@ga.co"], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Completed 302 Found in 74ms (ActiveRecord: 0.4ms)
+
+
+Started GET "/" for 10.0.2.2 at 2017-10-11 05:43:36 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by PagesController#home as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 123], ["LIMIT", 1]]
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 188ms (Views: 186.6ms | ActiveRecord: 0.1ms)
+
+
+Started POST "/trips" for 10.0.2.2 at 2017-10-11 05:43:51 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by TripsController#create as JSON
+  Parameters: {"trip"=>{"address"=>"99 Neutral St, Neutral Bay NSW 2089, Australia", "latitude"=>"-33.8386618", "longtitude"=>"151.21242860000007"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 123], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "trips" ("user_id", "created_at", "updated_at", "address", "latitude", "longtitude") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["user_id", 123], ["created_at", "2017-10-11 09:43:51.567997"], ["updated_at", "2017-10-11 09:43:51.567997"], ["address", "99 Neutral St, Neutral Bay NSW 2089, Australia"], ["latitude", -33.8386618], ["longtitude", 151.21242860000007]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mBooking Load (0.2ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings"[0m
+Completed 200 OK in 10ms (Views: 2.1ms | ActiveRecord: 2.2ms)
+
+
+Started PUT "/bookings/196" for 10.0.2.2 at 2017-10-11 05:43:52 -0400
+Started PUT "/bookings/195" for 10.0.2.2 at 2017-10-11 05:43:52 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Started PUT "/bookings/193" for 10.0.2.2 at 2017-10-11 05:43:52 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by BookingsController#update as */*
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by BookingsController#update as */*
+  Parameters: {"id"=>"196"}
+  Parameters: {"id"=>"195"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 123], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 123], ["LIMIT", 1]]
+  [1m[36mBooking Load (0.2ms)[0m  [1m[34mSELECT  "bookings".* FROM "bookings" WHERE "bookings"."id" = $1 LIMIT $2[0m  [["id", 196], ["LIMIT", 1]]
+  [1m[36mBooking Load (0.1ms)[0m  [1m[34mSELECT  "bookings".* FROM "bookings" WHERE "bookings"."id" = $1 LIMIT $2[0m  [["id", 195], ["LIMIT", 1]]
+  [1m[36mTrip Load (0.3ms)[0m  [1m[34mSELECT  "trips".* FROM "trips" WHERE "trips"."user_id" = $1 ORDER BY "trips"."id" DESC LIMIT $2[0m  [["user_id", 123], ["LIMIT", 1]]
+  [1m[36mTrip Load (0.3ms)[0m  [1m[34mSELECT  "trips".* FROM "trips" WHERE "trips"."user_id" = $1 ORDER BY "trips"."id" DESC LIMIT $2[0m  [["user_id", 123], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+Processing by BookingsController#update as */*
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "bookings" SET "trip_id" = $1, "updated_at" = $2 WHERE "bookings"."id" = $3[0m  [["trip_id", 181], ["updated_at", "2017-10-11 09:43:52.756030"], ["id", 195]]
+  Parameters: {"id"=>"193"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 123], ["LIMIT", 1]]
+  [1m[35m (1.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[33mUPDATE "bookings" SET "trip_id" = $1, "updated_at" = $2 WHERE "bookings"."id" = $3[0m  [["trip_id", 181], ["updated_at", "2017-10-11 09:43:52.757660"], ["id", 196]]
+  [1m[36mBooking Load (0.2ms)[0m  [1m[34mSELECT  "bookings".* FROM "bookings" WHERE "bookings"."id" = $1 LIMIT $2[0m  [["id", 193], ["LIMIT", 1]]
+  [1m[35m (1.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTrip Load (0.7ms)[0m  [1m[34mSELECT  "trips".* FROM "trips" WHERE "trips"."user_id" = $1 ORDER BY "trips"."id" DESC LIMIT $2[0m  [["user_id", 123], ["LIMIT", 1]]
+No template found for BookingsController#update, rendering head :no_content
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+Completed 204 No Content in 1598ms (ActiveRecord: 2.4ms)
+
+
+  [1m[35mSQL (1.1ms)[0m  [1m[33mUPDATE "bookings" SET "trip_id" = $1, "updated_at" = $2 WHERE "bookings"."id" = $3[0m  [["trip_id", 181], ["updated_at", "2017-10-11 09:43:54.347972"], ["id", 193]]
+No template found for BookingsController#update, rendering head :no_content
+Completed 204 No Content in 1603ms (ActiveRecord: 3.2ms)
+
+
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+No template found for BookingsController#update, rendering head :no_content
+Completed 204 No Content in 2331ms (ActiveRecord: 3.1ms)
+
+
+Started PUT "/bookings/195" for 10.0.2.2 at 2017-10-11 05:44:19 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by BookingsController#update as */*
+  Parameters: {"id"=>"195"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 123], ["LIMIT", 1]]
+  [1m[36mBooking Load (0.2ms)[0m  [1m[34mSELECT  "bookings".* FROM "bookings" WHERE "bookings"."id" = $1 LIMIT $2[0m  [["id", 195], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE "bookings" SET "picked_up" = $1, "updated_at" = $2 WHERE "bookings"."id" = $3[0m  [["picked_up", "2017-10-11 09:44:19.915204"], ["updated_at", "2017-10-11 09:44:19.916169"], ["id", 195]]
+  [1m[35m (1.4ms)[0m  [1m[35mCOMMIT[0m
+No template found for BookingsController#update, rendering head :no_content
+Completed 204 No Content in 753ms (ActiveRecord: 2.3ms)
+
+
+Started PUT "/bookings/193" for 10.0.2.2 at 2017-10-11 05:44:24 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by BookingsController#update as */*
+  Parameters: {"id"=>"193"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 123], ["LIMIT", 1]]
+  [1m[36mBooking Load (0.1ms)[0m  [1m[34mSELECT  "bookings".* FROM "bookings" WHERE "bookings"."id" = $1 LIMIT $2[0m  [["id", 193], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "bookings" SET "picked_up" = $1, "updated_at" = $2 WHERE "bookings"."id" = $3[0m  [["picked_up", "2017-10-11 09:44:24.833650"], ["updated_at", "2017-10-11 09:44:24.834616"], ["id", 193]]
+  [1m[35m (3.7ms)[0m  [1m[35mCOMMIT[0m
+No template found for BookingsController#update, rendering head :no_content
+Completed 204 No Content in 817ms (ActiveRecord: 4.5ms)
+
+
+Started PUT "/bookings/196" for 10.0.2.2 at 2017-10-11 05:44:28 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by BookingsController#update as */*
+  Parameters: {"id"=>"196"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 123], ["LIMIT", 1]]
+  [1m[36mBooking Load (0.1ms)[0m  [1m[34mSELECT  "bookings".* FROM "bookings" WHERE "bookings"."id" = $1 LIMIT $2[0m  [["id", 196], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[33mUPDATE "bookings" SET "picked_up" = $1, "updated_at" = $2 WHERE "bookings"."id" = $3[0m  [["picked_up", "2017-10-11 09:44:28.702489"], ["updated_at", "2017-10-11 09:44:28.703301"], ["id", 196]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+No template found for BookingsController#update, rendering head :no_content
+Completed 204 No Content in 732ms (ActiveRecord: 1.7ms)
+
+
+Started PUT "/bookings/196" for 10.0.2.2 at 2017-10-11 05:44:38 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by BookingsController#update as */*
+  Parameters: {"id"=>"196"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 123], ["LIMIT", 1]]
+  [1m[36mBooking Load (0.1ms)[0m  [1m[34mSELECT  "bookings".* FROM "bookings" WHERE "bookings"."id" = $1 LIMIT $2[0m  [["id", 196], ["LIMIT", 1]]
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "bookings" SET "dropped_off" = $1, "updated_at" = $2 WHERE "bookings"."id" = $3[0m  [["dropped_off", "2017-10-11 09:44:38.950505"], ["updated_at", "2017-10-11 09:44:38.952997"], ["id", 196]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+No template found for BookingsController#update, rendering head :no_content
+Completed 204 No Content in 691ms (ActiveRecord: 2.3ms)
+
+
+Started PUT "/bookings/193" for 10.0.2.2 at 2017-10-11 05:44:40 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by BookingsController#update as */*
+  Parameters: {"id"=>"193"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 123], ["LIMIT", 1]]
+  [1m[36mBooking Load (0.2ms)[0m  [1m[34mSELECT  "bookings".* FROM "bookings" WHERE "bookings"."id" = $1 LIMIT $2[0m  [["id", 193], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "bookings" SET "dropped_off" = $1, "updated_at" = $2 WHERE "bookings"."id" = $3[0m  [["dropped_off", "2017-10-11 09:44:40.685561"], ["updated_at", "2017-10-11 09:44:40.687132"], ["id", 193]]
+  [1m[35m (2.4ms)[0m  [1m[35mCOMMIT[0m
+No template found for BookingsController#update, rendering head :no_content
+Completed 204 No Content in 720ms (ActiveRecord: 3.3ms)
+
+
+Started PUT "/bookings/195" for 10.0.2.2 at 2017-10-11 05:44:41 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by BookingsController#update as */*
+  Parameters: {"id"=>"195"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 123], ["LIMIT", 1]]
+  [1m[36mBooking Load (0.3ms)[0m  [1m[34mSELECT  "bookings".* FROM "bookings" WHERE "bookings"."id" = $1 LIMIT $2[0m  [["id", 195], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE "bookings" SET "dropped_off" = $1, "updated_at" = $2 WHERE "bookings"."id" = $3[0m  [["dropped_off", "2017-10-11 09:44:41.740035"], ["updated_at", "2017-10-11 09:44:41.740711"], ["id", 195]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+No template found for BookingsController#update, rendering head :no_content
+Completed 204 No Content in 657ms (ActiveRecord: 2.0ms)
+
+
