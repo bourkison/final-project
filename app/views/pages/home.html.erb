@@ -72,6 +72,8 @@
     var bookingAutocomplete = new google.maps.places.Autocomplete($bookingInput[0], options);
     var tripAutocomplete = new google.maps.places.Autocomplete($tripInput[0], options);
 
+    var googObj;
+
     bookingAutocomplete.addListener('place_changed', function () {
       googObj = bookingAutocomplete.getPlace();
       addressObj.address = googObj.formatted_address;
@@ -255,7 +257,6 @@
             }
 
             locations = [];
-            geocodePromises = [];
 
             var geocoder = new google.maps.Geocoder();
             // Now let's geocode and add a marker at each of these locations!
