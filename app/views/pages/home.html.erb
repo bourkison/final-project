@@ -1,20 +1,22 @@
 <div class="container">
   <h1>Ubog</h1>
   <% if @current_user.present? %>
-    <p>Welcome back, <%= @current_user.name %></p>
+    <p class='info'>Welcome back, <%= @current_user.name %></p>
     <div class="bookingCreate">
       <h3>Find a Dog Walker!</h3>
       <input type="text" id="bookingAddress" placeholder="Address. Leave blank for home address."/>
       <button class="bookButton">Book Dog Walk!</button>
     </div>
-    <div id="bookingSuccess"></div>
 
     <div class="tripCreate">
       <h3>Walk Some Dogs!</h3>
       <input type="text" id="tripAddress" placeholder="Starting address. Leave blank for home address."/>
       <button class="tripButton">Find Dogs To Walk!</button>
     </div>
+    <div id="bookingSuccess"></div>
     <div id="tripSuccess"></div>
+    <% else %>
+      <p class='info'>Welcome to Ubog. Ubog is a form of Uber for dog walking. The name is literally "Uber" and "Dog" merged together. You may choose to either pick up some dogs in your local area, or get your own dog taken for a walk, free of charge <i>(subject to change)</i>. <%= link_to "Create an account", new_user_path %> or <%= link_to "login", login_path %> to get started!</p>
     <% end %>
 </div>
 

@@ -1,4 +1,29 @@
-input[type="text"] {
+html, body {
+  font-family: 'Cabin', sans-serif;
+}
+
+nav {
+  height: 1%;
+  text-align: right;
+}
+
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  color: white;
+  background: black;
+}
+
+
+/*  ===========================
+        HOME STYLING
+    =========================== */
+
+.container input[type="text"] {
   min-width: 100px;
   width: 70%;
   font-size: 16px;
@@ -9,10 +34,6 @@ button {
   font-size: 16px;
 }
 
-nav {
-  height: 1%;
-  text-align: right;
-}
 
 .container {
   height: 20%;
@@ -22,18 +43,29 @@ nav {
   width: 100%
 }
 
+.info {
+  width: 960px;
+  margin: 0 auto;
+  text-align: center;
+}
+
 .bookingCreate {
   width: 50%;
   float: left;
   text-align: left;
-  display: inline;
+  display: inline-block;
 }
 
 .tripCreate {
   width: 50%;
   float: right;
   text-align: left;
-  display: inline;
+  display: inline-block;
+}
+
+#bookingSuccess {
+  width: 100%;
+  display: inline-block;
 }
 
 #tripSuccess {
@@ -41,4 +73,45 @@ nav {
   height: 60%;
   width: 50%;
   overflow: scroll;
+}
+
+
+h1 {
+  text-align: center;
+  font-family: 'Sanchez', serif;
+}
+
+/*  ===========================
+        LOGIN STYLING
+    =========================== */
+
+.loginContainer {
+
+  width: 960px;
+  margin: 0 auto;
+  text-align: center;
+
+}
+
+
+
+/*  ===========================
+        SIGN UP STYLING
+    =========================== */
+
+.signUpContainer {
+  width: 960px;
+  margin: auto;
+  text-align: center;
+}
+
+fieldset {
+  border: none;
+}
+
+.signUpContainer input[type="text"], .signUpContainer input[type="password"] {
+  min-width: 100px;
+  width: 40%;
+  font-size: 16px;
+  text-align: center;
 }

@@ -1,50 +1,52 @@
-<h1>Sign Up!</h1>
+<div class='signUpContainer'>
+  <h1>Sign Up!</h1>
 
-<!-- Display any errors with creating an account here -->
-<% if @user.errors.any? %>
-  <b>Errors:</b>
-  <ol>
-    <% @user.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-  </ol>
-<% end %>
+  <!-- Display any errors with creating an account here -->
+  <% if @user.errors.any? %>
+    <b>Errors:</b>
+    <ol>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ol>
+  <% end %>
 
-<%= form_for @user do |f| %>
-  <fieldset>
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </fieldset>
-  <fieldset>
-    <%= f.label :email %><br>
-    <%= f.text_field :email, :id => 'emailField' %>
-  </fieldset>
-  <fieldset>
-    <label for="addr">Address</label><br>
-    <input type="text" id="addr" name="user[address]">
-    <!-- <%= f.label :address %><br>
-    <%= f.text_field :address, :id => 'addr' %> -->
-  </fieldset>
-  <fieldset>
-    <div class="conf"></div>
-    <%= f.label :description, "Give a brief description about yourself, that the people who walk your dogs will see or the dogs that you walk's owners will see." %><br>
-    <%= f.text_field :description %>
-  </fieldset>
-  <fieldset>
-    <%= f.label :password %><br>
-    <%= f.password_field :password %>
-  </fieldset>
-  <fieldset>
-    <%= f.label :password_confirmation %><br>
-    <%= f.password_field :password_confirmation %>
-  </fieldset>
-  <input type="hidden" name="user[address]" id="hiddenAddr" value=""/>
-  <input type="hidden" name="user[latitude]" id="lat" value=""/>
-  <input type="hidden" name="user[longtitude]" id="lng" value=""/>
+  <%= form_for @user do |f| %>
+    <fieldset>
+      <%= f.label :name %><br>
+      <%= f.text_field :name %>
+    </fieldset>
+    <fieldset>
+      <%= f.label :email %><br>
+      <%= f.text_field :email, :id => 'emailField' %>
+    </fieldset>
+    <fieldset>
+      <label for="addr">Address</label><br>
+      <input type="text" id="addr" name="user[address]">
+      <!-- <%= f.label :address %><br>
+      <%= f.text_field :address, :id => 'addr' %> -->
+    </fieldset>
+    <fieldset>
+      <div class="conf"></div>
+      <%= f.label :description, "Give a brief description about yourself, that the people who walk your dogs will see or the dogs that you walk's owners will see." %><br>
+      <%= f.text_field :description %>
+    </fieldset>
+    <fieldset>
+      <%= f.label :password %><br>
+      <%= f.password_field :password %>
+    </fieldset>
+    <fieldset>
+      <%= f.label :password_confirmation %><br>
+      <%= f.password_field :password_confirmation %>
+    </fieldset>
+    <input type="hidden" name="user[address]" id="hiddenAddr" value=""/>
+    <input type="hidden" name="user[latitude]" id="lat" value=""/>
+    <input type="hidden" name="user[longtitude]" id="lng" value=""/>
 
 
-  <%= f.submit "Sign Up!" %>
-<% end %>
+    <%= f.submit "Sign Up!" %>
+  <% end %>
+</div>
 
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBknCH8ac7AiYxL-9HQkKTT8KGKGydC7LU&libraries=places"></script>
 <script>

@@ -32571,3 +32571,308 @@ Processing by PagesController#home as HTML
 Completed 200 OK in 194ms (Views: 192.6ms | ActiveRecord: 0.1ms)
 
 
+Started GET "/" for 10.0.2.2 at 2017-10-12 02:36:18 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by PagesController#home as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 131], ["LIMIT", 1]]
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 403ms (Views: 401.7ms | ActiveRecord: 0.1ms)
+
+
+Started DELETE "/login" for 10.0.2.2 at 2017-10-12 02:36:21 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SessionController#destroy as HTML
+  Parameters: {"authenticity_token"=>"cmfBiCUVow6Gxs/TZBssDlh/xlSuKI0uAc3kAD9U99ijJC8E2PO9UwCNIxzGLHv5FWifHrIzCy/sLfls7ABx6Q=="}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 131], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Completed 302 Found in 5ms (ActiveRecord: 0.3ms)
+
+
+Started GET "/" for 10.0.2.2 at 2017-10-12 02:36:21 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by PagesController#home as HTML
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 611ms (Views: 609.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/login" for 10.0.2.2 at 2017-10-12 02:36:23 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SessionController#new as HTML
+  Rendering session/new.html.erb within layouts/application
+  Rendered session/new.html.erb within layouts/application (3.0ms)
+Completed 200 OK in 575ms (Views: 573.6ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/login" for 10.0.2.2 at 2017-10-12 02:38:42 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SessionController#new as HTML
+  Rendering session/new.html.erb within layouts/application
+  Rendered session/new.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 406ms (Views: 405.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/login" for 10.0.2.2 at 2017-10-12 02:38:55 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SessionController#new as HTML
+  Rendering session/new.html.erb within layouts/application
+  Rendered session/new.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 357ms (Views: 356.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/login" for 10.0.2.2 at 2017-10-12 02:43:24 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SessionController#new as HTML
+  Rendering session/new.html.erb within layouts/application
+  Rendered session/new.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 367ms (Views: 366.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 10.0.2.2 at 2017-10-12 02:43:53 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by PagesController#home as HTML
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 351ms (Views: 350.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 10.0.2.2 at 2017-10-12 02:45:49 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by PagesController#home as HTML
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 398ms (Views: 398.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/login" for 10.0.2.2 at 2017-10-12 02:45:54 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SessionController#new as HTML
+  Rendering session/new.html.erb within layouts/application
+  Rendered session/new.html.erb within layouts/application (3.2ms)
+Completed 200 OK in 519ms (Views: 518.4ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for 10.0.2.2 at 2017-10-12 02:46:00 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SessionController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"FzmTp2Li/pGxZ+wMM7yK8gn0Nxh6KNCyRHSmM5zWRYbGen0rnwTgzDcsAMORi90FRONuUmYzVrOplLtfT4LDtw==", "email"=>"harry@ga.co", "password"=>"[FILTERED]", "commit"=>"Login"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "harry@ga.co"], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Completed 302 Found in 76ms (ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 10.0.2.2 at 2017-10-12 02:46:00 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by PagesController#home as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 128], ["LIMIT", 1]]
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 185ms (Views: 183.0ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/" for 10.0.2.2 at 2017-10-12 02:47:40 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by PagesController#home as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 128], ["LIMIT", 1]]
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (15.2ms)
+Completed 200 OK in 433ms (Views: 431.6ms | ActiveRecord: 0.1ms)
+
+
+Started DELETE "/login" for 10.0.2.2 at 2017-10-12 02:47:50 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SessionController#destroy as HTML
+  Parameters: {"authenticity_token"=>"0Hh7VJnRzfEIs+Q3R6qYtduuccUiYrYAsXhnQ1rkAcwBO5XYZDfTrI74CPjlnc9Clrkojz55MAFcmHovibCH/Q=="}
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 128], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Completed 302 Found in 6ms (ActiveRecord: 0.6ms)
+
+
+Started GET "/" for 10.0.2.2 at 2017-10-12 02:47:51 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by PagesController#home as HTML
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (3.8ms)
+Completed 200 OK in 682ms (Views: 680.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 10.0.2.2 at 2017-10-12 02:49:42 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by PagesController#home as HTML
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 396ms (Views: 395.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 10.0.2.2 at 2017-10-12 02:49:48 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by PagesController#home as HTML
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (1.9ms)
+Completed 200 OK in 395ms (Views: 394.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 10.0.2.2 at 2017-10-12 02:50:15 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by PagesController#home as HTML
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 373ms (Views: 372.7ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/login" for 10.0.2.2 at 2017-10-12 02:50:21 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SessionController#new as HTML
+  Rendering session/new.html.erb within layouts/application
+  Rendered session/new.html.erb within layouts/application (3.3ms)
+Completed 200 OK in 647ms (Views: 645.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/login" for 10.0.2.2 at 2017-10-12 02:50:27 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SessionController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"gynL4subKoE/glvnzg9ngoqA1f3NwGOkJdij4JeVOblSaiVuNn003LnJtyhsODB1x5eMt9Hb5aXIOL6MRMG/iA==", "email"=>"harry@ga.co", "password"=>"[FILTERED]", "commit"=>"Login"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "harry@ga.co"], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Completed 302 Found in 91ms (ActiveRecord: 0.2ms)
+
+
+Started GET "/" for 10.0.2.2 at 2017-10-12 02:50:27 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by PagesController#home as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 128], ["LIMIT", 1]]
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (3.1ms)
+Completed 200 OK in 463ms (Views: 461.4ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/" for 10.0.2.2 at 2017-10-12 02:51:37 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by PagesController#home as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 128], ["LIMIT", 1]]
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 504ms (Views: 501.5ms | ActiveRecord: 0.2ms)
+
+
+Started DELETE "/login" for 10.0.2.2 at 2017-10-12 02:51:43 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by SessionController#destroy as HTML
+  Parameters: {"authenticity_token"=>"jrIhJMqGO3nlIIGUGOgup2Biv3kh73VCqalBuQ3p7FNf8c+oN2AlJGNrbVu633lQLXXmMz3080NESVzV3r1qYg=="}
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT  "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 128], ["LIMIT", 1]]
+Redirected to http://localhost:3000/
+Completed 302 Found in 6ms (ActiveRecord: 0.5ms)
+
+
+Started GET "/" for 10.0.2.2 at 2017-10-12 02:51:43 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by PagesController#home as HTML
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 342ms (Views: 341.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 10.0.2.2 at 2017-10-12 02:52:11 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by PagesController#home as HTML
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (3.6ms)
+Completed 200 OK in 731ms (Views: 730.2ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 10.0.2.2 at 2017-10-12 02:53:39 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by PagesController#home as HTML
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (4.4ms)
+Completed 200 OK in 681ms (Views: 680.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 10.0.2.2 at 2017-10-12 02:53:54 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by PagesController#home as HTML
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 229ms (Views: 228.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/" for 10.0.2.2 at 2017-10-12 02:55:00 -0400
+Cannot render console from 10.0.2.2! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
+Processing by PagesController#home as HTML
+  Rendering pages/home.html.erb within layouts/application
+  Rendered pages/home.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 225ms (Views: 224.9ms | ActiveRecord: 0.0ms)
+
+
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 128]]
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 129]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 130]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[31mDELETE FROM "users" WHERE "users"."id" = $1[0m  [["id", 131]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.3ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "harry@ga.co"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "latitude", "longtitude", "description", "email", "created_at", "updated_at", "password_digest") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Harrison Bourke"], ["address", "433 Alfred St N, Neutral Bay NSW 2089, Australia"], ["latitude", -33.8332364], ["longtitude", 151.21261419999996], ["description", "19 year old who absolutely loves dogs!"], ["email", "harry@ga.co"], ["created_at", "2017-10-12 06:58:02.255224"], ["updated_at", "2017-10-12 06:58:02.255224"], ["password_digest", "$2a$10$e10dZl4p.Pqy0nstl1uz4uD1zjX.06kM/zUsMC3EV0FB/i.kgJzBe"]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "matt@ga.co"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "latitude", "longtitude", "description", "email", "created_at", "updated_at", "password_digest") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Matt Edge"], ["address", "12 Redfern St, Redfern NSW 2016, Australia"], ["latitude", -33.8930003], ["longtitude", 151.207172], ["description", "Absolutely love my dog Whiskey, but down to make friends with some new dogs!"], ["email", "matt@ga.co"], ["created_at", "2017-10-12 06:58:02.329071"], ["updated_at", "2017-10-12 06:58:02.329071"], ["password_digest", "$2a$10$WVC5GIMxgjO2Ejbk3DqKQuCclPt9Xag36jHUbosjoH84R0I4sXjtC"]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "richie@ga.co"], ["LIMIT", 1]]
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "latitude", "longtitude", "description", "email", "created_at", "updated_at", "password_digest") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Richie Stanton"], ["address", "51 Spofforth St, Mosman NSW 2088, Australia"], ["latitude", -33.8325518], ["longtitude", 151.22944889999997], ["description", "Love looking after dogs - often get paid to do so!"], ["email", "richie@ga.co"], ["created_at", "2017-10-12 06:58:02.396702"], ["updated_at", "2017-10-12 06:58:02.396702"], ["password_digest", "$2a$10$czQ8/tvol2dlSkQFL5s79e7ZDlxIHX2E141LG2ZRJYxaXDONiuwJe"]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists (0.2ms)[0m  [1m[34mSELECT  1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "kane@ga.co"], ["LIMIT", 1]]
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO "users" ("name", "address", "latitude", "longtitude", "description", "email", "created_at", "updated_at", "password_digest") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["name", "Kane Mott"], ["address", "12 Penrith Ave, Wheeler Heights NSW 2097, Australia"], ["latitude", -33.732427], ["longtitude", 151.2794176], ["description", "Don't have any dogs of my own, hence keen to make some friends with other people's!"], ["email", "kane@ga.co"], ["created_at", "2017-10-12 06:58:02.464495"], ["updated_at", "2017-10-12 06:58:02.464495"], ["password_digest", "$2a$10$JNYj.8lToaH2oaDvicCiWuz0C0kyBj5ChZtYQY1jGyZ2ElQFrGEua"]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mBooking Load (0.3ms)[0m  [1m[34mSELECT "bookings".* FROM "bookings"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "bookings" WHERE "bookings"."id" = $1[0m  [["id", 203]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "bookings" WHERE "bookings"."id" = $1[0m  [["id", 202]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "bookings" WHERE "bookings"."id" = $1[0m  [["id", 201]]
+  [1m[35m (0.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "bookings" WHERE "bookings"."id" = $1[0m  [["id", 205]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "bookings" ("latitude", "longtitude", "created_at", "updated_at", "address") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["latitude", -33.8698209], ["longtitude", 151.20643289999998], ["created_at", "2017-10-12 06:58:02.510547"], ["updated_at", "2017-10-12 06:58:02.510547"], ["address", "56 York St, Sydney NSW 2000, Australia"]]
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "bookings" ("latitude", "longtitude", "created_at", "updated_at", "address") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["latitude", -33.8685585], ["longtitude", 151.20337240000003], ["created_at", "2017-10-12 06:58:02.513297"], ["updated_at", "2017-10-12 06:58:02.513297"], ["address", "115 Sussex St, Sydney NSW 2000, Australia"]]
+  [1m[35m (1.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "bookings" ("latitude", "longtitude", "created_at", "updated_at", "address") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["latitude", -33.86235639999999], ["longtitude", 151.21024349999993], ["created_at", "2017-10-12 06:58:02.516136"], ["updated_at", "2017-10-12 06:58:02.516136"], ["address", "1 Loftus St, Sydney NSW 2000, Australia"]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "bookings" ("latitude", "longtitude", "created_at", "updated_at", "address") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["latitude", -33.8586684], ["longtitude", 151.20743500000003], ["created_at", "2017-10-12 06:58:02.519496"], ["updated_at", "2017-10-12 06:58:02.519496"], ["address", "96 Cumberland St, The Rocks NSW 2000, Australia"]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTrip Load (0.3ms)[0m  [1m[34mSELECT "trips".* FROM "trips"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM "trips" WHERE "trips"."id" = $1[0m  [["id", 185]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[33mUPDATE "bookings" SET "user_id" = $1, "updated_at" = $2 WHERE "bookings"."id" = $3[0m  [["user_id", 132], ["updated_at", "2017-10-12 06:58:02.618353"], ["id", 206]]
+  [1m[35m (1.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[33mUPDATE "bookings" SET "user_id" = $1, "updated_at" = $2 WHERE "bookings"."id" = $3[0m  [["user_id", 133], ["updated_at", "2017-10-12 06:58:02.621475"], ["id", 207]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[33mUPDATE "bookings" SET "user_id" = $1, "updated_at" = $2 WHERE "bookings"."id" = $3[0m  [["user_id", 134], ["updated_at", "2017-10-12 06:58:02.624969"], ["id", 208]]
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[33mUPDATE "bookings" SET "user_id" = $1, "updated_at" = $2 WHERE "bookings"."id" = $3[0m  [["user_id", 135], ["updated_at", "2017-10-12 06:58:02.627983"], ["id", 209]]
+  [1m[35m (1.3ms)[0m  [1m[35mCOMMIT[0m
