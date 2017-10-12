@@ -229,7 +229,8 @@
           for (var i = 0; i < bookings.length; i++) {
             // We need to check that the bookings aren't already completed, nor are they part of a trip. We do this by checking if there is an associaton before pushing into destinations.
             if (bookings[i].trip_id === null) {
-              destinations.push({ lat: bookings[i].latitude, lng: bookings[i].longtitude, ad: bookings[i].address, id: bookings[i].id });
+              // destinations.push({ lat: bookings[i].latitude, lng: bookings[i].longtitude, ad: bookings[i].address, id: bookings[i].id });
+              destinations.push(bookings[i].address)
             }
           }
           // Make an array of objects which will have an address key and distance key to better associate the 2.
@@ -243,12 +244,20 @@
             destinations: destinations,
             travelMode: 'WALKING'
           }, function (response, status) {
+            console.log(response);
+            console.log(destinations);
             for (var i = 0; i < response.destinationAddresses.length; i++) {
-              distances.push({
-                address: response.destinationAddresses[i],
-                distance: response.rows[0].elements[i].distance.value,
-                booking_id: destinations[i].id
-              });
+              for (var j = 0; j < destinations.length; j++) {
+                if (response.destinationAddresses[i] === destinations[j]) {
+                  distances.push({
+                    address: response.destinationAddresses[i],
+                    distance: response.rows[0].elements[i].distance.value,
+                    booking_id: bookings[j].id
+                  });
+                  console.log("Check if working:", distances[i])
+                  break;
+                }
+               }
             }
 
             setTimeout(500, function(){
@@ -264,6 +273,10 @@
               return a.distance - b.distance;
             });
 
+            setTimeout(500, function(){
+              console.log("Please work");
+            });
+
             // Now let's drop the array to have only the closest 3 bookings.
             while (distances.length > 3) {
               distances.pop();
@@ -275,6 +288,7 @@
             // Now let's geocode and add a marker at each of these locations!
             for (var i = 0; i < distances.length; i++) {
               geocoder.geocode({ 'address': distances[i].address }, function (geoResult, geoStatus) {
+                console.log("GEO RESULT");
                 locations.push({
                   lat: geoResult[0].geometry.location.lat(),
                   lng: geoResult[0].geometry.location.lng()
